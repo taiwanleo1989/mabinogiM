@@ -173,16 +173,17 @@ section{padding:70px 0;scroll-margin-top:80px}
   background:rgba(5,8,17,.72);backdrop-filter:blur(6px)}
 .modal.open{display:grid}
 .modal .box{max-width:520px;width:100%;border-radius:20px;padding:0;overflow:hidden;
+  max-height:calc(100vh - 40px);max-height:calc(100dvh - 40px);display:flex;flex-direction:column;
   border:1px solid var(--line);background:linear-gradient(180deg,var(--panel2),var(--bg2));
   box-shadow:var(--shadow);animation:pop .25s ease}
 @keyframes pop{from{transform:scale(.94) translateY(10px);opacity:0}to{transform:none;opacity:1}}
-.modal .head{padding:24px 26px;position:relative;background:var(--fc,#333);
+.modal .head{padding:24px 26px;position:relative;flex-shrink:0;background:var(--fc,#333);
   background:linear-gradient(120deg,var(--fc,#333),rgba(0,0,0,.25))}
 .modal .head .fam{font-size:12px;letter-spacing:2px;opacity:.85}
 .modal .head h3{font-size:28px;color:#fff;margin:2px 0}
 .modal .head .ko{opacity:.8;font-size:13px}
 .modal .head .bn{top:18px;right:64px;width:40px;height:40px;font-size:16px}
-.modal .body{padding:24px 26px}
+.modal .body{padding:24px 26px;overflow-y:auto;min-height:0}
 .modal .row{display:flex;gap:12px;margin-bottom:14px;font-size:14.5px}
 .modal .row .lb{color:var(--muted);min-width:64px;flex-shrink:0}
 .modal .row .vl{color:var(--ink)}
