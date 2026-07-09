@@ -1,0 +1,77 @@
+# 專案交接文件 — 瑪奇 Mobile 新手攻略站
+
+> 最後更新：2026-07-09　狀態：**已上線**
+
+---
+
+## 一句話
+《瑪奇 Mobile》新手友善攻略網站，已部署到 GitHub Pages，改一個資料檔 `git push` 就自動更新。
+
+## 🔗 快速連結
+| 項目 | 位置 |
+|------|------|
+| **線上網站** | https://taiwanleo1989.github.io/mabinogi-mobile-guide/ |
+| **GitHub repo** | https://github.com/taiwanleo1989/mabinogi-mobile-guide （public） |
+| **本機路徑** | `C:\Users\Leo\claudeCode workspase\Game\mabinogi-mobile` |
+| **即時分享快照（Artifact）** | https://claude.ai/code/artifact/796df75d-c3dc-43d1-b4ea-2c7ee12a4b8f |
+| **資料來源清單** | [data/sources.md](data/sources.md) |
+
+---
+
+## 🧭 架構（最重要的觀念）
+- **單一資料源**：所有攻略內容只存在一份 → **`site/game-data.json`**。網站（未來的 App 也一樣）都 fetch 讀它。
+- **部署**：push 到 `main` → GitHub Actions（`.github/workflows/deploy.yml`）自動把 `site/` 發佈到 Pages。
+- **兩平台計畫**：先 PWA（現在的網站已可「加入主畫面」）→ 需要上架時用 **Capacitor** 包同一份 web 程式碼，**不做純原生**（單人維護會翻倍）。
+- **本機預覽需伺服器**（資料用 fetch，不能直接雙擊 index.html）：
+  ```bash
+  cd site
+  python -m http.server 8080   # 開 http://localhost:8080
+  ```
+
+## ✏️ 如何更新攻略（日常操作）
+1. 編輯 `site/game-data.json`（唯一要改的檔）。
+2. 推上去：
+   ```bash
+   cd "C:/Users/Leo/claudeCode workspase/Game/mabinogi-mobile"
+   git add -A && git commit -m "更新攻略內容" && git push
+   ```
+3. GitHub Actions 自動重新部署，1～2 分鐘後線上更新。
+
+## 📁 檔案結構
+```
+mabinogi-mobile/
+├── site/                     ← 可部署的 App（Pages 部署此資料夾）
+│   ├── index.html            ← 網站（fetch game-data.json → 渲染）
+│   ├── game-data.json        ← ⭐ 單一資料源（改這個）
+│   ├── manifest.webmanifest  ← PWA
+│   └── icon.svg
+├── data/
+│   ├── sources.md            ← 全球資料來源
+│   └── README.md
+├── .github/workflows/deploy.yml
+├── README.md
+└── HANDOVER.md               ← 本檔
+```
+
+---
+
+## ✅ 已完成
+- 全球資料蒐集（韓國一手為主）：職業、技能循環、裝備符文、生活、貨幣、地圖 NPC、每日作業
+- 遊戲風攻略網站：12 章節、18 職業圖鑑＋詳情彈窗、tier、新手測驗、可勾選任務清單、PWA
+- 單一資料源重構（網站改 fetch）
+- 部署上線 GitHub Pages ＋ push 自動部署
+- 回饋按鈕（讀 `meta.feedbackUrl`，設定後出現）
+
+## 📌 待辦 / 下一步
+1. **啟用回饋表單**：[forms.new](https://forms.new) 建表單 → 連結貼進 `game-data.json` 的 `meta.feedbackUrl` → push。建議問：①哪裡看不懂 ②想補什麼 ③有無錯誤過時 ④你是新手/老手。
+2. **資料更新機制**：自動抓最新資訊 → AI 整理成草稿 → **人工求證審核** → 才進正式資料。（守住「不捏造」紅線的關鍵閘門。）
+3. **後期營利（方向）**：廣告 / 訂閱 / 斗內。訂閱建議走網站金流（Stripe）避開商店 15～30% 抽成。
+
+## ⚠️ 重要注意事項
+- **求證紅線**：技能名、數值等只採「有來源」的內容，找不到就標「待補」，**不自己編**。
+- **版權**：自己消化改寫、標註來源；抓別人內容再發布＋營利有風險，前期就養成好習慣。
+- **時效**：職業 tier／強度屬社群人氣與賽季版本，會變動；台港尚無官方在地版，內容以韓國版為準。定期回補。
+- **技術備註**：某些 headless/預覽環境不觸發 IntersectionObserver 與 CSS transition；reveal 動畫已改為「捲動偵測＋1.5s failsafe」，真實瀏覽器與 Capacitor WebView 正常。
+
+## 📚 資料來源
+見 [data/sources.md](data/sources.md)。主要：韓國 Namu Wiki、Inven、BlueStacks、DCinside；英文 Vortex Gaming；台灣 巴哈姆特、川川雲。
