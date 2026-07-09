@@ -1,0 +1,16 @@
+{
+  "name": "瑪奇 Mobile 新手冒險指南",
+  "short_name": "瑪奇攻略",
+  "description": "瑪奇 Mobile（마비노기 모바일）新手友善攻略：18 職業圖鑑、新手黃金路線、生活玩法、貨幣系統。",
+  "lang": "zh-Hant",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b1020",
+  "theme_color": "#0b1020",
+  "icons": [
+    { "src": "./icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "./icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}

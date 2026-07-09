@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>瑪奇 Mobile 新手冒險指南 · 艾琳世界攻略</title>
+<meta name="description" content="瑪奇 Mobile（마비노기 모바일）新手友善攻略：18 職業圖鑑、新手黃金路線、生活玩法、貨幣系統，全球資料整理。">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0b1020">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="apple-touch-icon" href="icon.svg">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="瑪奇攻略">
+<meta name="mobile-web-app-capable" content="yes">
+<style>
+:root{
+  --bg:#0b1020; --bg2:#111a30; --panel:#151f3a; --panel2:#1c2947;
+  --ink:#e8eefc; --ink-dim:#9fb0d0; --muted:#6f83a8;
+  --gold:#e7c66a; --gold-soft:#f3dd9a; --gold-deep:#b8912f;
+  --line:rgba(231,198,106,.22); --line-soft:rgba(159,176,208,.14);
+  --shadow:0 18px 50px rgba(0,0,0,.45);
+  --r:16px;
+  --warrior:#c94b4b; --archer:#3f9d5a; --mage:#5b6fd6; --healer:#d9a441; --bard:#b05bc0; --rogue:#4aa9a9;
+  --s:#ff6b6b; --a:#ffb454; --b:#5cc9f5; --c:#9aa7bf;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC",system-ui,sans-serif;
+  background:var(--bg); color:var(--ink); line-height:1.7; overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.serif{font-family:Georgia,"Times New Roman","Noto Serif TC","Microsoft JhengHei",serif;}
+a{color:inherit;text-decoration:none}
+img{max-width:100%}
+
+/* ---------- Starfield backdrop ---------- */
+.sky{position:fixed;inset:0;z-index:-2;
+  background:
+    radial-gradient(1200px 700px at 80% -10%, rgba(91,111,214,.20), transparent 60%),
+    radial-gradient(1000px 600px at 10% 10%, rgba(63,157,90,.12), transparent 60%),
+    radial-gradient(900px 700px at 50% 110%, rgba(231,198,106,.10), transparent 60%),
+    linear-gradient(180deg,#0a0f1f,#0b1020 40%,#0a0e1c);
+}
+.stars{position:fixed;inset:0;z-index:-1;opacity:.5;pointer-events:none}
+.stars i{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;
+  animation:tw 4s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.15}50%{opacity:.9}}
+
+/* ---------- Top HUD nav ---------- */
+header{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);
+  background:linear-gradient(180deg,rgba(10,15,31,.92),rgba(10,15,31,.7));
+  border-bottom:1px solid var(--line);}
+.hud{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:18px;
+  padding:12px 20px;}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.5px}
+.brand .crest{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;
+  background:radial-gradient(circle at 30% 25%,var(--gold-soft),var(--gold-deep));
+  color:#3a2c07;font-size:18px;box-shadow:0 0 18px rgba(231,198,106,.45)}
+.brand b{color:var(--gold-soft)}
+.brand small{display:block;color:var(--muted);font-weight:400;font-size:11px;letter-spacing:2px}
+nav{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
+nav a{padding:8px 13px;border-radius:10px;color:var(--ink-dim);font-size:14px;
+  border:1px solid transparent;transition:.2s;white-space:nowrap}
+nav a:hover{color:var(--gold-soft);background:rgba(231,198,106,.08);border-color:var(--line)}
+.menu-btn{display:none;margin-left:auto;background:none;border:1px solid var(--line);
+  color:var(--gold-soft);font-size:20px;border-radius:10px;padding:6px 12px;cursor:pointer}
+
+/* ---------- Layout ---------- */
+main{max-width:1200px;margin:0 auto;padding:0 20px}
+section{padding:70px 0;scroll-margin-top:80px}
+.eyebrow{color:var(--gold);letter-spacing:4px;font-size:12px;font-weight:700;text-transform:uppercase}
+.sec-title{font-size:clamp(24px,3.4vw,36px);margin:8px 0 6px;color:#fff}
+.sec-sub{color:var(--ink-dim);max-width:720px;margin-bottom:34px}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:0 auto;max-width:1200px}
+
+/* ---------- Hero ---------- */
+.hero{min-height:82vh;display:flex;flex-direction:column;justify-content:center;
+  align-items:center;text-align:center;position:relative;padding:90px 20px 70px}
+.hero .runeframe{border:1px solid var(--line);border-radius:26px;padding:44px 36px;
+  background:linear-gradient(180deg,rgba(21,31,58,.55),rgba(11,16,32,.35));
+  box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.05);max-width:860px;
+  position:relative;overflow:hidden}
+.hero .runeframe::before{content:"";position:absolute;inset:0;
+  background:radial-gradient(600px 200px at 50% -20%,rgba(231,198,106,.16),transparent 70%)}
+.badge-live{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--gold-soft);
+  border:1px solid var(--line);border-radius:999px;padding:6px 14px;margin-bottom:22px;
+  background:rgba(231,198,106,.06)}
+.badge-live .dot{width:8px;height:8px;border-radius:50%;background:#4be08a;box-shadow:0 0 10px #4be08a;animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{font-size:clamp(30px,6vw,58px);line-height:1.18;color:#fff;
+  text-shadow:0 4px 30px rgba(91,111,214,.4);word-break:keep-all;text-wrap:balance}
+.hero h1 .hl{background:linear-gradient(120deg,var(--gold-soft),var(--gold),var(--gold-deep));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-tagline{font-size:clamp(17px,3.4vw,26px);color:var(--gold-soft);font-family:Georgia,"Noto Serif TC",serif;
+  margin-top:12px;letter-spacing:1px;word-break:keep-all;text-wrap:balance}
+.hero p.lead{color:var(--ink-dim);font-size:clamp(15px,2vw,19px);margin:18px auto 8px;max-width:640px}
+.hero .kicker{color:var(--muted);font-size:14px;margin-top:6px}
+.cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+.btn{padding:13px 26px;border-radius:12px;font-weight:700;font-size:15px;cursor:pointer;
+  border:1px solid var(--line);transition:.2s;display:inline-flex;align-items:center;gap:9px}
+.btn.primary{background:linear-gradient(120deg,var(--gold),var(--gold-deep));color:#2a1f05;
+  border-color:transparent;box-shadow:0 10px 30px rgba(231,198,106,.3)}
+.btn.primary:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(231,198,106,.42)}
+.btn.ghost{color:var(--gold-soft);background:rgba(231,198,106,.05)}
+.btn.ghost:hover{background:rgba(231,198,106,.12);transform:translateY(-2px)}
+
+.hero-stats{display:flex;gap:26px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+.hero-stats div{text-align:center}
+.hero-stats b{display:block;font-size:26px;color:var(--gold-soft);font-family:Georgia,serif}
+.hero-stats span{font-size:12px;color:var(--muted);letter-spacing:1px}
+
+/* ---------- Feature grid ---------- */
+.grid{display:grid;gap:16px}
+.features{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.card{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line-soft);
+  border-radius:var(--r);padding:22px;transition:.25s;position:relative;overflow:hidden}
+.card:hover{transform:translateY(-4px);border-color:var(--line);box-shadow:var(--shadow)}
+.feat .ic{font-size:30px;margin-bottom:10px}
+.feat h3{font-size:18px;color:var(--gold-soft);margin-bottom:6px}
+.feat p{color:var(--ink-dim);font-size:14.5px}
+
+/* ---------- Class select ---------- */
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px;align-items:center}
+.chip{padding:8px 15px;border-radius:999px;border:1px solid var(--line-soft);cursor:pointer;
+  color:var(--ink-dim);font-size:13.5px;transition:.2s;background:rgba(255,255,255,.02)}
+.chip:hover{color:var(--gold-soft);border-color:var(--line)}
+.chip.on{background:linear-gradient(120deg,var(--gold),var(--gold-deep));color:#2a1f05;border-color:transparent;font-weight:700}
+.chip .k{opacity:.6;font-size:11px;margin-left:4px}
+.filter-label{color:var(--muted);font-size:12px;letter-spacing:2px;margin-right:4px}
+
+.class-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:15px}
+.ccard{border-radius:var(--r);padding:18px;cursor:pointer;position:relative;overflow:hidden;
+  border:1px solid var(--line-soft);background:linear-gradient(180deg,var(--panel),var(--bg2));
+  transition:.25s;min-height:170px;display:flex;flex-direction:column}
+.ccard::before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:var(--fc,#888)}
+.ccard:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--line)}
+.ccard .fam{font-size:12px;color:var(--muted);letter-spacing:1px}
+.ccard h4{font-size:20px;margin:4px 0 2px;color:#fff}
+.ccard .ko{font-size:12px;color:var(--muted)}
+.ccard .wp{margin-top:auto;font-size:13px;color:var(--ink-dim)}
+.ccard .role-tag{display:inline-block;font-size:12px;color:var(--gold-soft);margin-top:8px;
+  padding:3px 9px;border:1px solid var(--line);border-radius:8px}
+.ccard .cyc-mark{display:inline-block;font-size:11px;color:#4be08a;margin-top:8px;margin-left:6px;
+  padding:3px 8px;border:1px solid rgba(75,224,138,.4);border-radius:8px;background:rgba(75,224,138,.06)}
+.bn{position:absolute;top:12px;right:12px;width:30px;height:30px;border-radius:9px;display:grid;
+  place-items:center;font-weight:800;font-size:13px;font-family:Georgia,serif;color:#12131a}
+.bn.S{background:linear-gradient(135deg,#ff8a8a,#ff5252)}
+.bn.A{background:linear-gradient(135deg,#ffd08a,#ffab40)}
+.bn.B{background:linear-gradient(135deg,#8fdcff,#43b8f0)}
+.bn.C{background:linear-gradient(135deg,#c3ccdd,#9aa7bf)}
+
+/* ---------- Modal ---------- */
+.modal{position:fixed;inset:0;z-index:100;display:none;place-items:center;padding:20px;
+  background:rgba(5,8,17,.72);backdrop-filter:blur(6px)}
+.modal.open{display:grid}
+.modal .box{max-width:520px;width:100%;border-radius:20px;padding:0;overflow:hidden;
+  border:1px solid var(--line);background:linear-gradient(180deg,var(--panel2),var(--bg2));
+  box-shadow:var(--shadow);animation:pop .25s ease}
+@keyframes pop{from{transform:scale(.94) translateY(10px);opacity:0}to{transform:none;opacity:1}}
+.modal .head{padding:24px 26px;position:relative;background:var(--fc,#333);
+  background:linear-gradient(120deg,var(--fc,#333),rgba(0,0,0,.25))}
+.modal .head .fam{font-size:12px;letter-spacing:2px;opacity:.85}
+.modal .head h3{font-size:28px;color:#fff;margin:2px 0}
+.modal .head .ko{opacity:.8;font-size:13px}
+.modal .head .bn{top:18px;right:64px;width:40px;height:40px;font-size:16px}
+.modal .body{padding:24px 26px}
+.modal .row{display:flex;gap:12px;margin-bottom:14px;font-size:14.5px}
+.modal .row .lb{color:var(--muted);min-width:64px;flex-shrink:0}
+.modal .row .vl{color:var(--ink)}
+.modal .desc{color:var(--ink-dim);font-size:15px;line-height:1.75;margin-top:6px;
+  padding-top:16px;border-top:1px solid var(--line-soft)}
+.cycle-box{display:none;margin-top:16px;padding:14px 16px;border-radius:12px;
+  background:rgba(231,198,106,.06);border:1px solid var(--line)}
+.cycle-box.show{display:block}
+.cycle-title{color:var(--gold-soft);font-size:13px;font-weight:700;letter-spacing:1px;margin-bottom:6px}
+.cycle-box p{color:var(--ink-dim);font-size:14px;line-height:1.7}
+.x{position:absolute;top:16px;right:16px;background:rgba(0,0,0,.3);border:none;color:#fff;
+  width:34px;height:34px;border-radius:10px;cursor:pointer;font-size:18px;z-index:2}
+
+/* ---------- Quiz ---------- */
+.quiz{background:linear-gradient(180deg,var(--panel2),var(--bg2));border:1px solid var(--line);
+  border-radius:20px;padding:30px;box-shadow:var(--shadow)}
+.quiz h3{color:var(--gold-soft);font-size:22px;margin-bottom:4px}
+.qopts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:18px}
+.qopt{padding:16px 18px;border-radius:14px;border:1px solid var(--line-soft);cursor:pointer;
+  background:rgba(255,255,255,.02);transition:.2s;display:flex;gap:12px;align-items:center}
+.qopt:hover{border-color:var(--line);background:rgba(231,198,106,.06);transform:translateY(-2px)}
+.qopt .qi{font-size:26px}
+.qopt b{display:block;color:#fff}
+.qopt span{font-size:13px;color:var(--muted)}
+.quiz-result{margin-top:22px;padding:22px;border-radius:16px;border:1px dashed var(--line);
+  background:rgba(231,198,106,.05);display:none}
+.quiz-result.show{display:block;animation:pop .3s}
+.quiz-result .pick{font-size:24px;color:var(--gold-soft);font-family:Georgia,serif}
+
+/* golden path */
+.path{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:0;align-items:stretch;margin-top:10px}
+.step{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line-soft);
+  border-radius:16px;padding:20px;text-align:center;position:relative}
+.step .n{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-deep));
+  color:#2a1f05;font-weight:800;display:grid;place-items:center;margin:0 auto 10px;font-family:Georgia,serif}
+.step h4{color:#fff;font-size:18px}
+.step .ko{color:var(--muted);font-size:12px;margin-bottom:6px}
+.step p{color:var(--ink-dim);font-size:13.5px}
+.arrow{display:grid;place-items:center;color:var(--gold);font-size:24px;padding:0 6px}
+
+/* ---------- Quest checklist ---------- */
+.quest{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line-soft);
+  border-radius:var(--r);padding:6px 4px}
+.qitem{display:flex;gap:14px;padding:15px 18px;border-bottom:1px solid var(--line-soft);cursor:pointer;
+  transition:.15s;align-items:flex-start}
+.qitem:last-child{border-bottom:none}
+.qitem:hover{background:rgba(231,198,106,.04)}
+.qbox{width:24px;height:24px;border-radius:7px;border:2px solid var(--muted);flex-shrink:0;margin-top:2px;
+  display:grid;place-items:center;transition:.2s;font-size:14px;color:transparent}
+.qitem.done .qbox{background:linear-gradient(135deg,#4be08a,#28a866);border-color:transparent;color:#08240f}
+.qitem.done .qt b{text-decoration:line-through;color:var(--muted)}
+.qt b{color:#fff;font-size:15.5px}
+.qt p{color:var(--ink-dim);font-size:13.5px}
+.qbadge{margin-left:auto;flex-shrink:0;font-size:11px;color:var(--gold-soft);border:1px solid var(--line);
+  padding:2px 8px;border-radius:7px;align-self:center}
+.progwrap{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.progbar{flex:1;height:12px;border-radius:999px;background:var(--panel);overflow:hidden;border:1px solid var(--line-soft)}
+.progfill{height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--gold),#4be08a);transition:.4s}
+.progtxt{color:var(--gold-soft);font-weight:700;font-size:14px;min-width:44px;text-align:right}
+
+/* ---------- Life / two-col ---------- */
+.life-grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.life h3{color:var(--gold-soft);font-size:19px;display:flex;align-items:center;gap:9px}
+.life .ko{color:var(--muted);font-size:12px;font-weight:400}
+.life ul{list-style:none;margin:12px 0;display:flex;flex-wrap:wrap;gap:7px}
+.life li{font-size:12.5px;color:var(--ink-dim);background:rgba(255,255,255,.03);
+  padding:4px 10px;border-radius:8px;border:1px solid var(--line-soft)}
+.life .tip{font-size:13.5px;color:var(--ink-dim);border-top:1px solid var(--line-soft);padding-top:12px;margin-top:4px}
+.life .tip::before{content:"💡 ";}
+
+/* ---------- Currency table ---------- */
+.cur-grid{grid-template-columns:repeat(auto-fit,minmax(255px,1fr))}
+.cur .top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.cur .ic{font-size:30px}
+.cur h3{color:#fff;font-size:18px}
+.cur h3 span{display:block;font-size:12px;color:var(--muted);font-weight:400}
+.cur .kv{font-size:13.5px;color:var(--ink-dim);margin:5px 0}
+.cur .kv b{color:var(--gold-soft);font-weight:600}
+
+/* ---------- Systems ---------- */
+.sys-grid{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.sys h3{color:var(--gold-soft);font-size:19px;margin-bottom:10px;display:flex;gap:9px;align-items:center}
+.sys ul{list-style:none}
+.sys li{position:relative;padding:7px 0 7px 24px;color:var(--ink-dim);font-size:14px;border-bottom:1px dashed var(--line-soft)}
+.sys li:last-child{border-bottom:none}
+.sys li::before{content:"◆";position:absolute;left:2px;color:var(--gold);font-size:11px;top:10px}
+
+/* tier board */
+.tier-note{color:var(--muted);font-size:13px;margin-bottom:18px;padding:12px 16px;
+  border-left:3px solid var(--gold);background:rgba(231,198,106,.05);border-radius:0 10px 10px 0}
+.tier-row{display:flex;gap:14px;align-items:stretch;margin-bottom:12px}
+.tier-badge{width:74px;flex-shrink:0;border-radius:12px;display:grid;place-items:center;text-align:center;
+  font-family:Georgia,serif;color:#12131a;font-weight:800}
+.tier-badge b{font-size:26px;line-height:1}
+.tier-badge span{font-size:10px;color:rgba(0,0,0,.6);letter-spacing:1px}
+.tier-0{background:linear-gradient(135deg,#ff8a8a,#ff5252)}
+.tier-1{background:linear-gradient(135deg,#ffd08a,#ffab40)}
+.tier-2{background:linear-gradient(135deg,#8fdcff,#43b8f0)}
+.tier-3{background:linear-gradient(135deg,#c3ccdd,#9aa7bf)}
+.tier-classes{flex:1;display:flex;flex-wrap:wrap;gap:8px;align-items:center;
+  background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line-soft);
+  border-radius:12px;padding:12px 16px}
+.tier-classes span{font-size:13.5px;color:var(--ink-dim);background:rgba(255,255,255,.03);
+  padding:4px 11px;border-radius:8px;border:1px solid var(--line-soft)}
+
+/* ---------- Footer ---------- */
+footer{border-top:1px solid var(--line);margin-top:40px;padding:40px 20px;text-align:center;color:var(--muted)}
+footer a{color:var(--gold-soft)}
+footer .fnote{max-width:720px;margin:0 auto 14px;font-size:13px}
+footer .warn{font-size:12px;color:#c78; margin-top:8px}
+
+/* ---------- Equipment / Rune ---------- */
+.rune-track{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:22px;
+  background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line-soft);
+  border-radius:14px;padding:16px 18px}
+.rune-track .lbl{color:var(--muted);font-size:12px;letter-spacing:1px;margin-right:4px}
+.rune-pill{font-size:13px;padding:5px 12px;border-radius:9px;color:#12131a;font-weight:700}
+.rune-arrow{color:var(--gold);font-size:14px}
+.rg0{background:linear-gradient(135deg,#c3ccdd,#9aa7bf)}
+.rg1{background:linear-gradient(135deg,#8fe0a8,#43c07a)}
+.rg2{background:linear-gradient(135deg,#8fdcff,#43b8f0)}
+.rg3{background:linear-gradient(135deg,#c9a3ff,#9a6bf0)}
+.rg4{background:linear-gradient(135deg,#ffd08a,#ffab40)}
+.mech-grid{grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}
+.mech h3{color:var(--gold-soft);font-size:17px;display:flex;align-items:baseline;gap:8px;margin-bottom:8px}
+.mech h3 .ko{font-size:12px;color:var(--muted);font-weight:400}
+.mech p{color:var(--ink-dim);font-size:14px}
+
+/* ---------- Regions & NPC ---------- */
+.region-grid{grid-template-columns:repeat(auto-fit,minmax(255px,1fr))}
+.region .tag{display:inline-block;font-size:11px;color:var(--gold-soft);border:1px solid var(--line);
+  border-radius:7px;padding:2px 9px;margin-bottom:8px}
+.region h3{color:#fff;font-size:18px}
+.region h3 .en{font-size:12px;color:var(--muted);font-weight:400;margin-left:6px}
+.region .ko{font-size:12px;color:var(--muted);margin-bottom:6px}
+.region p{color:var(--ink-dim);font-size:13.5px}
+.npc-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:16px}
+.npc{display:flex;gap:14px;align-items:flex-start;background:linear-gradient(180deg,var(--panel),var(--bg2));
+  border:1px solid var(--line-soft);border-radius:14px;padding:15px 17px}
+.npc .av{width:44px;height:44px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;font-size:22px;
+  background:radial-gradient(circle at 30% 25%,var(--gold-soft),var(--gold-deep));color:#3a2c07}
+.npc b{color:#fff;font-size:15.5px}
+.npc .en{color:var(--muted);font-size:12px;font-weight:400}
+.npc .where{display:inline-block;font-size:11px;color:var(--gold-soft);margin-left:6px}
+.npc p{color:var(--ink-dim);font-size:13px;margin-top:3px}
+
+/* ---------- Daily tasks ---------- */
+.daily-cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.daily-col h3{font-size:18px;margin-bottom:12px;display:flex;align-items:center;gap:9px}
+.daily-col.d h3{color:#5cc9f5}.daily-col.w h3{color:var(--gold-soft)}
+.task{display:flex;gap:11px;align-items:flex-start;padding:11px 14px;border-radius:12px;margin-bottom:8px;
+  background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line-soft)}
+.task .ck{width:9px;height:9px;border-radius:50%;background:var(--muted);margin-top:8px;flex-shrink:0}
+.task.pri .ck{background:#4be08a;box-shadow:0 0 8px #4be08a}
+.task b{color:#fff;font-size:14.5px}
+.task .ko{color:var(--muted);font-size:11px;margin-left:5px;font-weight:400}
+.task p{color:var(--ink-dim);font-size:12.5px;margin-top:2px}
+.pri-flag{margin-left:auto;font-size:10px;color:#4be08a;border:1px solid rgba(75,224,138,.4);border-radius:6px;padding:1px 6px;align-self:center;flex-shrink:0}
+.order-note{margin-top:18px;padding:14px 18px;border-left:3px solid var(--gold);background:rgba(231,198,106,.05);
+  border-radius:0 10px 10px 0;color:var(--ink-dim);font-size:13.5px}
+
+#feedbackBtn{position:fixed;right:16px;bottom:16px;z-index:60;display:none;align-items:center;gap:6px;
+  padding:12px 18px;border-radius:999px;font-size:14px;font-weight:700;color:#2a1f05;cursor:pointer;
+  background:linear-gradient(120deg,var(--gold),var(--gold-deep));box-shadow:0 10px 30px rgba(231,198,106,.35);
+  border:1px solid rgba(255,255,255,.2);transition:.2s}
+#feedbackBtn:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(231,198,106,.5)}
+
+.reveal{opacity:0;transform:translateY(24px);transition:.6s}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:860px){
+  nav{display:none;position:fixed;top:60px;right:12px;flex-direction:column;background:var(--panel2);
+    border:1px solid var(--line);border-radius:14px;padding:10px;box-shadow:var(--shadow)}
+  nav.show{display:flex}
+  .menu-btn{display:block}
+  .path{grid-template-columns:1fr}
+  .arrow{transform:rotate(90deg);padding:6px 0}
+  .daily-cols{grid-template-columns:1fr}
+}
+@media(max-width:360px){
+  .hud{gap:10px;padding:10px 12px}
+  .brand{font-size:13px}
+  .brand small{font-size:10px;letter-spacing:1px}
+  .brand .crest{width:30px;height:30px;font-size:16px}
+  section{padding:52px 0}
+  .hero .runeframe{padding:32px 20px}
+}
+</style>
+</head>
+<body>
+<div class="sky"></div>
+<div class="stars" id="stars"></div>
+
+<div id="loadError" style="display:none;position:fixed;top:0;left:0;right:0;z-index:200;background:#3a1414;color:#ffd7d7;padding:13px 16px;font-size:14px;line-height:1.6;text-align:center;border-bottom:1px solid #7a2a2a">
+  ⚠ 資料載入失敗 — 本站需透過「伺服器」開啟（不能直接雙擊 index.html）。<br>
+  請在 site 資料夾執行 <code style="background:rgba(255,255,255,.12);padding:1px 5px;border-radius:4px">python -m http.server</code>，或部署到網址後再開。
+  <div style="opacity:.55;font-size:12px;margin-top:5px"><span id="loadErrorMsg"></span></div>
+</div>
+
+<header>
+  <div class="hud">
+    <a href="#top" class="brand">
+      <span class="crest">⚔</span>
+      <span>瑪奇 Mobile <b>攻略</b><small>ERINN · 新手冒險指南</small></span>
+    </a>
+    <button class="menu-btn" onclick="document.getElementById('nav').classList.toggle('show')">☰</button>
+    <nav id="nav" onclick="this.classList.remove('show')">
+      <a href="#about">遊戲介紹</a>
+      <a href="#classes">職業圖鑑</a>
+      <a href="#tier">職業強度</a>
+      <a href="#combat">戰鬥系統</a>
+      <a href="#start">新手路線</a>
+      <a href="#quest">任務清單</a>
+      <a href="#daily">每日作業</a>
+      <a href="#life">生活玩法</a>
+      <a href="#equip">裝備符文</a>
+      <a href="#currency">貨幣</a>
+      <a href="#regions">地圖NPC</a>
+      <a href="#systems">系統機制</a>
+    </nav>
+  </div>
+</header>
+
+<a id="top"></a>
+<!-- HERO -->
+<div class="hero">
+  <div class="runeframe reveal">
+    <span class="badge-live"><span class="dot"></span> 韓國已上線 · 2025.03.27 · 全球版籌備中</span>
+    <h1>踏入 <span class="hl">艾琳</span> 的世界</h1>
+    <p class="hero-tagline">你的第一趟冒險，從這裡開始</p>
+    <p class="lead">《瑪奇 Mobile》是一款高自由度的開放世界生活 MMORPG。換一把武器就換一種職業，也可以只當釣魚、料理、演奏的生活玩家。這份指南把全球（尤其韓國）的一手資料整理成新手也能秒懂的攻略。</p>
+    <p class="kicker">마비노기 모바일 · Mabinogi Mobile · devCAT / Nexon</p>
+    <div class="cta">
+      <a href="#start" class="btn primary">🧭 我是新手，帶我入門</a>
+      <a href="#classes" class="btn ghost">📖 直接看職業圖鑑</a>
+    </div>
+    <div class="hero-stats">
+      <div><b>18</b><span>轉職職業</span></div>
+      <div><b>6</b><span>職業系別</span></div>
+      <div><b>∞</b><span>自由轉職</span></div>
+      <div><b>5+</b><span>生活玩法</span></div>
+    </div>
+  </div>
+</div>
+
+<main>
+<!-- ABOUT -->
+<section id="about">
+  <div class="reveal">
+    <div class="eyebrow">What is this game</div>
+    <h2 class="sec-title">這是一款什麼樣的遊戲？</h2>
+    <p class="sec-sub">一句話：<b style="color:var(--gold-soft)">在同一片艾琳世界，用你喜歡的方式生活</b>——想戰鬥就戰鬥，想釣魚就釣魚。它延續 PC 版《瑪奇》的女神敘事，是同 IP 的全新作品，不是舊版移植。</p>
+  </div>
+  <div class="grid features" id="features"></div>
+</section>
+<div class="divider"></div>
+
+<!-- CLASSES -->
+<section id="classes">
+  <div class="reveal">
+    <div class="eyebrow">Character Select</div>
+    <h2 class="sec-title">職業圖鑑 · 18 種轉職</h2>
+    <p class="sec-sub">選哪個開局都沒關係！起始職業<b style="color:var(--gold-soft)">不會限制</b>你之後能轉的職業。換上不同武器就能即時切換職業，一隻角色可以體驗全部。點卡片看詳情，右上角是<b>新手友善度</b>（S 最好上手）。</p>
+  </div>
+  <div class="filters reveal">
+    <span class="filter-label">系別</span>
+    <div class="chip on" data-fam="all" onclick="filterFam(this)">全部</div>
+    <div id="famChips" style="display:contents"></div>
+  </div>
+  <div class="filters reveal" style="margin-top:-8px">
+    <span class="filter-label">新手友善</span>
+    <div class="chip on" data-bn="all" onclick="filterBn(this)">全部</div>
+    <div class="chip" data-bn="S" onclick="filterBn(this)">S 超好上手</div>
+    <div class="chip" data-bn="A" onclick="filterBn(this)">A 推薦</div>
+    <div class="chip" data-bn="B" onclick="filterBn(this)">B 可玩</div>
+    <div class="chip" data-bn="C" onclick="filterBn(this)">C 進階</div>
+  </div>
+  <div class="class-grid" id="classGrid"></div>
+</section>
+<div class="divider"></div>
+
+<!-- TIER -->
+<section id="tier">
+  <div class="reveal">
+    <div class="eyebrow">Tier List</div>
+    <h2 class="sec-title">職業強度排行</h2>
+    <div class="tier-note" id="tierNote"></div>
+  </div>
+  <div id="tierBoard" class="reveal"></div>
+</section>
+<div class="divider"></div>
+
+<!-- COMBAT SYSTEM -->
+<section id="combat">
+  <div class="reveal">
+    <div class="eyebrow">Combat System</div>
+    <h2 class="sec-title">戰鬥與技能系統</h2>
+    <p class="sec-sub" id="combatIntro"></p>
+  </div>
+  <div class="grid sys-grid reveal" id="combatGrid"></div>
+</section>
+<div class="divider"></div>
+
+<!-- START / QUIZ + PATH -->
+<section id="start">
+  <div class="reveal">
+    <div class="eyebrow">Getting Started</div>
+    <h2 class="sec-title">新手該怎麼開始？</h2>
+    <p class="sec-sub">別怕選錯——這遊戲可以無限轉職。但如果想要一條最省心的成長路線，看這裡。</p>
+  </div>
+
+  <div class="quiz reveal">
+    <h3>🎯 你是哪一種冒險者？</h3>
+    <p style="color:var(--ink-dim);font-size:14px">選一個最像你的玩法，馬上推薦適合的起手職業。</p>
+    <div class="qopts" id="quizOpts"></div>
+    <div class="quiz-result" id="quizResult"></div>
+  </div>
+
+  <h3 class="serif" style="color:var(--gold-soft);font-size:20px;margin:38px 0 6px">👑 新手黃金路線</h3>
+  <p style="color:var(--ink-dim);font-size:14px;margin-bottom:18px" id="goldenFormula"></p>
+  <div class="path">
+    <div class="step reveal"><div class="n">1</div><h4>冰結術士</h4><div class="ko">빙결술사</div><p>開局主力。清怪、破防、單體、持續傷害樣樣行，還能嘲諷當坦。</p></div>
+    <div class="arrow reveal">➜</div>
+    <div class="step reveal"><div class="n">2</div><h4>石弓射手</h4><div class="ko">석궁사수</div><p>進 Abyss／裂隙後兼練。連射＋範圍傷害，刷高難度內容神器。</p></div>
+    <div class="arrow reveal">➜</div>
+    <div class="step reveal"><div class="n">3</div><h4>劍術士</h4><div class="ko">검술사</div><p>加入 Raid 隊時追加培養，補足團隊近戰輸出的一環。</p></div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- QUEST CHECKLIST -->
+<section id="quest">
+  <div class="reveal">
+    <div class="eyebrow">Quest Log</div>
+    <h2 class="sec-title">新手必做任務清單</h2>
+    <p class="sec-sub">照著打勾就對了。進度會自動記在你的瀏覽器裡，下次打開還在。這些是最容易被忽略、卻直接影響成長效率的關鍵。</p>
+  </div>
+  <div class="reveal">
+    <div class="progwrap">
+      <div class="progbar"><div class="progfill" id="progFill"></div></div>
+      <div class="progtxt" id="progTxt">0%</div>
+    </div>
+    <div class="quest" id="questList"></div>
+    <p style="color:var(--muted);font-size:12.5px;margin-top:12px">💾 進度儲存在本機，不會上傳。<a href="#" onclick="resetQuest();return false" style="color:var(--gold-soft)">重置清單</a></p>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- DAILY -->
+<section id="daily">
+  <div class="reveal">
+    <div class="eyebrow">Daily & Weekly</div>
+    <h2 class="sec-title">每日／每週作業行事曆</h2>
+    <p class="sec-sub" id="dailyIntro"></p>
+  </div>
+  <div class="daily-cols reveal">
+    <div class="daily-col d"><h3>☀️ 每日作業</h3><div id="dailyList"></div></div>
+    <div class="daily-col w"><h3>📅 每週作業</h3><div id="weeklyList"></div></div>
+  </div>
+  <div class="order-note reveal" id="orderNote"></div>
+</section>
+<div class="divider"></div>
+
+<!-- LIFE -->
+<section id="life">
+  <div class="reveal">
+    <div class="eyebrow">Life Skills</div>
+    <h2 class="sec-title">生活玩法 · 不打怪也能玩</h2>
+    <p class="sec-sub" id="lifeIntro"></p>
+  </div>
+  <div class="grid life-grid" id="lifeGrid"></div>
+</section>
+<div class="divider"></div>
+
+<!-- EQUIPMENT -->
+<section id="equip">
+  <div class="reveal">
+    <div class="eyebrow">Gear & Runes</div>
+    <h2 class="sec-title">裝備與符文（룬）系統</h2>
+    <p class="sec-sub" id="equipIntro"></p>
+  </div>
+  <div class="rune-track reveal" id="runeTrack"></div>
+  <div class="grid mech-grid" id="mechGrid"></div>
+</section>
+<div class="divider"></div>
+
+<!-- CURRENCY -->
+<section id="currency">
+  <div class="reveal">
+    <div class="eyebrow">Economy</div>
+    <h2 class="sec-title">貨幣系統一次搞懂</h2>
+    <p class="sec-sub">搞懂四種貨幣，新手最不會卡關。<b style="color:var(--gold-soft)">銀幣</b>是進地下城的關鍵，記得每天在商店補。</p>
+  </div>
+  <div class="grid cur-grid" id="curGrid"></div>
+</section>
+<div class="divider"></div>
+
+<!-- REGIONS -->
+<section id="regions">
+  <div class="reveal">
+    <div class="eyebrow">World & NPCs</div>
+    <h2 class="sec-title">艾琳地圖與重要 NPC</h2>
+    <p class="sec-sub" id="regionIntro"></p>
+  </div>
+  <div class="grid region-grid reveal" id="regionGrid"></div>
+  <h3 class="serif reveal" style="color:var(--gold-soft);font-size:20px;margin:34px 0 4px">🧙 你會遇到的重要 NPC</h3>
+  <div class="npc-list reveal" id="npcList"></div>
+</section>
+<div class="divider"></div>
+
+<!-- SYSTEMS -->
+<section id="systems">
+  <div class="reveal">
+    <div class="eyebrow">Core Systems</div>
+    <h2 class="sec-title">你一定要懂的系統機制</h2>
+    <p class="sec-sub">轉職、重生、戰鬥內容——這些是瑪奇 Mobile 的核心循環。</p>
+  </div>
+  <div class="grid sys-grid" id="sysGrid"></div>
+</section>
+</main>
+
+<footer>
+  <div class="fnote">
+    本站為<b style="color:var(--gold-soft)">新手攻略資訊整理</b>，資料蒐集自韓國、英文、台灣等全球社群與官方來源（更新於 2026-07-09）。
+    《瑪奇 Mobile / 마비노기 모바일》為 Nexon / devCAT Studio 所有。
+  </div>
+  <div class="fnote" style="color:var(--muted)">📚 完整資料來源見專案 <code>data/sources.md</code>。</div>
+  <div class="warn">⚠ 職業強度／Tier 屬社群人氣與版本評價，會隨賽季平衡改動，非絕對標準。台港版本尚未官方在地化，內容以韓國版為準。</div>
+</footer>
+
+<!-- FEEDBACK -->
+<a id="feedbackBtn" href="#" target="_blank" rel="noopener" style="display:none">💬&nbsp;回饋</a>
+
+<!-- MODAL -->
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="box">
+    <div class="head" id="mHead">
+      <button class="x" onclick="closeModal()">✕</button>
+      <div class="fam" id="mFam"></div>
+      <h3 id="mName"></h3>
+      <div class="ko" id="mKo"></div>
+      <div class="bn" id="mBn"></div>
+    </div>
+    <div class="body">
+      <div class="row"><span class="lb">武器</span><span class="vl" id="mWeapon"></span></div>
+      <div class="row"><span class="lb">定位</span><span class="vl" id="mRole"></span></div>
+      <div class="row"><span class="lb">新手友善</span><span class="vl" id="mBnText"></span></div>
+      <div class="desc" id="mDesc"></div>
+      <div class="cycle-box" id="mCycleBox">
+        <div class="cycle-title">⚔ 技能循環（進階）</div>
+        <p id="mCycle"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ===== global state — DATA loaded from single source of truth (game-data.json) ===== */
+let DATA=null, allCards=[];
+const bnText={S:"S · 超好上手，新手第一首選",A:"A · 推薦，容易上手",B:"B · 可玩，稍需熟悉",C:"C · 進階／需要操作或養成"};
+
+/* ===== helpers ===== */
+const $=(s,el=document)=>el.querySelector(s);
+const el=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e;};
+
+// starfield (no data needed)
+(function(){const s=$("#stars");let h="";for(let i=0;i<70;i++){h+=`<i style="left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*4}s"></i>`;}s.innerHTML=h;})();
+
+/* ===== load single source of truth (game-data.json), then render ===== */
+fetch("game-data.json",{cache:"no-cache"})
+  .then(r=>{if(!r.ok)throw new Error("HTTP "+r.status);return r.json();})
+  .then(d=>{DATA=d;renderAll();})
+  .catch(err=>{console.error("資料載入失敗：",err);const b=$("#loadError");if(b){b.style.display="block";$("#loadErrorMsg").textContent=String(err);}});
+
+function renderAll(){
+// features
+DATA.features.forEach(f=>{
+  const c=el("div","card feat reveal",`<div class="ic">${f.icon}</div><h3>${f.title}</h3><p>${f.desc}</p>`);
+  $("#features").appendChild(c);
+});
+
+// family chips
+const famColors={};
+DATA.families.forEach(fam=>{
+  famColors[fam.name]=fam.color;
+  const c=el("div","chip",`${fam.icon} ${fam.name}<span class="k">${fam.korean}</span>`);
+  c.dataset.fam=fam.id; c.onclick=()=>filterFam(c);
+  $("#famChips").appendChild(c);
+});
+
+// class cards
+DATA.families.forEach(fam=>{
+  fam.classes.forEach(cl=>{
+    const card=el("div","ccard");
+    card.style.setProperty("--fc",fam.color);
+    card.dataset.fam=fam.id; card.dataset.bn=cl.bn;
+    card.innerHTML=`<div class="bn ${cl.bn}">${cl.bn}</div>
+      <div class="fam">${fam.icon} ${fam.name}</div>
+      <h4>${cl.name}</h4><div class="ko">${cl.korean}</div>
+      <div class="role-tag">${cl.role}</div>${cl.cycle?'<span class="cyc-mark">⚔ 有技能循環</span>':''}
+      <div class="wp">🗡 ${cl.weapon}</div>`;
+    card.onclick=()=>openModal(fam,cl);
+    $("#classGrid").appendChild(card);
+    allCards.push(card);
+  });
+});
+
+// tier board
+$("#tierNote").textContent=DATA.tier.note;
+DATA.tier.rows.forEach(r=>{
+  const row=el("div","tier-row");
+  const chips=r.cls.map(c=>`<span>${c}</span>`).join("");
+  row.innerHTML=`<div class="tier-badge tier-${r.t}"><b>${r.t}</b><span>${r.label}</span></div>
+    <div class="tier-classes">${chips}</div>`;
+  $("#tierBoard").appendChild(row);
+});
+
+// golden formula
+$("#goldenFormula").textContent=DATA.goldenFormula;
+
+// quiz
+DATA.quiz.forEach(q=>{
+  const o=el("div","qopt",`<div class="qi">${q.qi}</div><div><b>${q.title}</b><span>${q.sub}</span></div>`);
+  o.onclick=()=>{
+    document.querySelectorAll(".qopt").forEach(x=>x.style.borderColor="");
+    o.style.borderColor="var(--gold)";
+    const r=$("#quizResult");
+    r.innerHTML=`<div style="color:var(--muted);font-size:13px;letter-spacing:1px">推薦起手職業</div>
+      <div class="pick">✦ ${q.pick}</div>
+      <p style="color:var(--ink-dim);margin-top:6px">${q.why}</p>
+      <a href="#classes" class="btn ghost" style="margin-top:14px">到職業圖鑑看看 →</a>`;
+    r.classList.add("show");
+  };
+  $("#quizOpts").appendChild(o);
+});
+
+// life
+$("#lifeIntro").textContent=DATA.lifeIntro;
+DATA.life.forEach(l=>{
+  const skills=l.skills.map(s=>`<li>${s}</li>`).join("");
+  const c=el("div","card life reveal",
+    `<h3>${l.icon} ${l.name} <span class="ko">${l.korean}</span></h3>
+     <ul>${skills}</ul><div class="tip">${l.tip}</div>`);
+  $("#lifeGrid").appendChild(c);
+});
+
+// currency
+DATA.currencies.forEach(cu=>{
+  const c=el("div","card cur reveal",
+    `<div class="top"><div class="ic">${cu.icon}</div><h3>${cu.name}<span>${cu.korean}</span></h3></div>
+     <div class="kv"><b>取得</b>：${cu.source}</div>
+     <div class="kv"><b>用途</b>：${cu.use}</div>
+     <div class="kv"><b>上限/回復</b>：${cu.cap}</div>`);
+  $("#curGrid").appendChild(c);
+});
+
+// systems
+DATA.systems.forEach(s=>{
+  const items=s.items.map(i=>`<li>${i}</li>`).join("");
+  const c=el("div","card sys reveal",`<h3>${s.icon} ${s.title}</h3><ul>${items}</ul>`);
+  $("#sysGrid").appendChild(c);
+});
+
+// combat system
+$("#combatIntro").textContent=DATA.combatIntro;
+DATA.combat.forEach(c=>{
+  const card=el("div","card mech reveal",
+    `<h3>${c.icon} ${c.name} <span class="ko">${c.ko}</span></h3><p>${c.desc}</p>`);
+  $("#combatGrid").appendChild(card);
+});
+
+// daily / weekly
+$("#dailyIntro").textContent=DATA.dailyIntro;
+$("#orderNote").innerHTML="🧭 "+DATA.newbieOrder;
+DATA.daily.forEach(t=>{
+  const it=el("div","task"+(t.pri?" pri":""),
+    `<div class="ck"></div><div style="flex:1"><b>${t.name}</b><span class="ko">${t.ko}</span><p>${t.desc}</p></div>${t.pri?'<span class="pri-flag">必做</span>':''}`);
+  $("#dailyList").appendChild(it);
+});
+DATA.weekly.forEach(t=>{
+  const it=el("div","task pri",
+    `<div class="ck"></div><div style="flex:1"><b>${t.name}</b><span class="ko">${t.ko}</span><p>${t.desc}</p></div>`);
+  $("#weeklyList").appendChild(it);
+});
+
+// equipment / rune
+$("#equipIntro").textContent=DATA.equipIntro;
+const rt=$("#runeTrack");
+rt.innerHTML='<span class="lbl">符文等級</span>';
+DATA.runeGrades.forEach((g,i)=>{
+  rt.appendChild(el("span","rune-pill rg"+i,g));
+  if(i<DATA.runeGrades.length-1)rt.appendChild(el("span","rune-arrow","➜"));
+});
+DATA.mech.forEach(m=>{
+  const c=el("div","card mech reveal",`<h3>${m.name} <span class="ko">${m.ko}</span></h3><p>${m.desc}</p>`);
+  $("#mechGrid").appendChild(c);
+});
+
+// regions / npc
+$("#regionIntro").textContent=DATA.regionIntro;
+DATA.places.forEach(p=>{
+  const c=el("div","card region reveal",
+    `<span class="tag">${p.tag}</span><h3>${p.name}<span class="en">${p.en}</span></h3>
+     <div class="ko">${p.ko}</div><p>${p.desc}</p>`);
+  $("#regionGrid").appendChild(c);
+});
+DATA.npcs.forEach(n=>{
+  const c=el("div","npc",
+    `<div class="av">🧝</div><div><b>${n.name}</b><span class="en">${n.en}</span><span class="where">📍${n.where}</span><p>${n.role}</p></div>`);
+  $("#npcList").appendChild(c);
+});
+
+  // feedback button — shown only if a feedback URL is set in game-data.json (meta.feedbackUrl)
+  if(DATA.meta && DATA.meta.feedbackUrl){const fb=$("#feedbackBtn");fb.href=DATA.meta.feedbackUrl;fb.style.display="inline-flex";}
+
+  // quests + scroll-reveal (robust; some webviews don't fire IntersectionObserver)
+  renderQuests();
+  revealInView();
+  window.addEventListener("scroll",revealInView,{passive:true});
+  window.addEventListener("resize",revealInView);
+  // failsafe: never leave content hidden even without scroll/animation ticks
+  setTimeout(()=>document.querySelectorAll(".reveal:not(.in)").forEach(x=>x.classList.add("in")),1500);
+}
+function revealInView(){
+  const vh=window.innerHeight||800;
+  document.querySelectorAll(".reveal:not(.in)").forEach(x=>{
+    if(x.getBoundingClientRect().top < vh*0.92) x.classList.add("in");
+  });
+}
+
+/* ===== Modal ===== */
+function openModal(fam,cl){
+  $("#mHead").style.setProperty("--fc",fam.color);
+  $("#mFam").textContent=`${fam.icon} ${fam.name} · ${fam.korean}`;
+  $("#mName").textContent=cl.name;
+  $("#mKo").textContent=cl.korean;
+  const bn=$("#mBn"); bn.textContent=cl.bn; bn.className="bn "+cl.bn;
+  $("#mWeapon").textContent=cl.weapon;
+  $("#mRole").textContent=cl.role;
+  $("#mBnText").textContent=bnText[cl.bn];
+  $("#mDesc").textContent=cl.desc;
+  const cb=$("#mCycleBox");
+  if(cl.cycle){$("#mCycle").textContent=cl.cycle;cb.classList.add("show");}
+  else cb.classList.remove("show");
+  $("#modal").classList.add("open");
+}
+function closeModal(){$("#modal").classList.remove("open");}
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal();});
+
+/* ===== Filters ===== */
+let curFam="all",curBn="all";
+function applyFilter(){
+  allCards.forEach(c=>{
+    const okF=curFam==="all"||c.dataset.fam===curFam;
+    const okB=curBn==="all"||c.dataset.bn===curBn;
+    c.style.display=(okF&&okB)?"":"none";
+  });
+}
+function filterFam(chip){
+  curFam=chip.dataset.fam;
+  document.querySelectorAll("[data-fam]").forEach(x=>{if(x.classList.contains("chip"))x.classList.remove("on");});
+  chip.classList.add("on"); applyFilter();
+}
+function filterBn(chip){
+  curBn=chip.dataset.bn;
+  document.querySelectorAll("[data-bn]").forEach(x=>{if(x.classList.contains("chip"))x.classList.remove("on");});
+  chip.classList.add("on"); applyFilter();
+}
+
+/* ===== Quest checklist (localStorage) ===== */
+const QKEY="mabi_quest_v1";
+let qState=JSON.parse(localStorage.getItem(QKEY)||"[]");
+function renderQuests(){
+  const list=$("#questList"); list.innerHTML="";
+  DATA.quests.forEach((q,i)=>{
+    const done=qState[i];
+    const it=el("div","qitem"+(done?" done":""),
+      `<div class="qbox">✔</div><div class="qt"><b>${q.t}</b><p>${q.p}</p></div><div class="qbadge">${q.b}</div>`);
+    it.onclick=()=>{qState[i]=!qState[i];localStorage.setItem(QKEY,JSON.stringify(qState));renderQuests();};
+    list.appendChild(it);
+  });
+  const done=DATA.quests.filter((_,i)=>qState[i]).length;
+  const pct=Math.round(done/DATA.quests.length*100);
+  $("#progFill").style.width=pct+"%";
+  $("#progTxt").textContent=pct+"%";
+}
+function resetQuest(){qState=[];localStorage.removeItem(QKEY);renderQuests();}
+</script>
+</body>
+</html>
