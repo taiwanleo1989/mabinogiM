@@ -440,6 +440,16 @@ footer .warn{font-size:12px;color:#c78; margin-top:8px}
 .news-item p{font-size:13px;color:var(--ink-dim);line-height:1.6;margin:0}
 .news-note{color:var(--muted);font-size:12px;line-height:1.7;margin-top:16px;
   border-left:2px solid var(--line);padding-left:12px;max-width:820px}
+/* ===== 官方技能圖示列（modal） ===== */
+.offskills{margin-top:16px}
+.offskill-row{display:flex;gap:9px;flex-wrap:wrap;margin-top:10px}
+.offskill{position:relative;width:52px;height:52px;border-radius:12px;overflow:hidden;
+  border:1px solid var(--line);background:rgba(0,0,0,.25);box-shadow:0 3px 10px rgba(0,0,0,.3)}
+.offskill img{width:100%;height:100%;object-fit:cover;display:block}
+.offskill .slot{position:absolute;left:3px;top:3px;min-width:15px;height:15px;padding:0 3px;
+  border-radius:5px;background:rgba(11,16,32,.82);color:var(--gold-soft);font-size:10px;font-weight:700;
+  line-height:15px;text-align:center;font-variant-numeric:tabular-nums}
+.offskills .skills-title{color:var(--gold-soft)}
 </style>
 </head>
 <body>
@@ -681,6 +691,10 @@ footer .warn{font-size:12px;color:#c78; margin-top:8px}
       <div class="skills" id="mSkills">
         <div class="skills-title"><svg class="isvg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 6.1H20l-4.9 3.6 1.9 6.1L12 15.2 7 18.8l1.9-6.1L4 9.1h6.1z" fill="currentColor" stroke="none"/></svg> 代表技能</div>
         <div id="mSkillList"></div>
+      </div>
+      <div class="offskills" id="mOfficial" style="display:none">
+        <div class="skills-title"><svg class="isvg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M9 12l2 2 4-4" stroke-width="2.2"/></svg> 官方技能圖示（1～6 技能槽）</div>
+        <div class="offskill-row" id="mOfficialRow"></div>
       </div>
       <div class="cycle-box" id="mCycleBox">
         <div class="cycle-title"><svg class="isvg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="19" x2="16.5" y2="7.5"/><line x1="19" y1="19" x2="7.5" y2="7.5"/><line x1="3.5" y1="15.5" x2="7.5" y2="19.5"/><line x1="20.5" y1="15.5" x2="16.5" y2="19.5"/></svg> 技能循環（進階）</div>
@@ -989,6 +1003,12 @@ function openModal(fam,cl){
   }else{
     sl.innerHTML=`<div class="skills-todo">技能細節整理中——之後會補上有來源的技能名與效果（守求證紅線，查證後才放）。</div>`;
   }
+  // 官方技能圖示（1～6 技能槽）— 有 skillIcons 才顯示
+  const off=$("#mOfficial"), offRow=$("#mOfficialRow");
+  if(cl.skillIcons&&cl.skillIcons.length){
+    offRow.innerHTML=cl.skillIcons.map((src,i)=>`<div class="offskill"><img src="${src}" alt="技能 ${i+1}" loading="lazy"><span class="slot">${i+1}</span></div>`).join("");
+    off.style.display="block";
+  }else{off.style.display="none";}
   const cb=$("#mCycleBox");
   if(cl.cycle){$("#mCycle").textContent=cl.cycle;cb.classList.add("show");}
   else cb.classList.remove("show");
