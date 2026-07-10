@@ -10,3 +10,6 @@ desktop.ini
 # 暫存
 *.log
 *.tmp
+
+# 內部研究草稿（含未證實洩漏，走「求證後才進正式」流程，不進公開 repo）
+data/research/

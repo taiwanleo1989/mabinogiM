@@ -33,6 +33,23 @@
 - [巴哈姆特 - 各職業解析](https://forum.gamer.com.tw/C.php?bsn=32564&snA=215)
 - [川川雲手機 - 瑪奇 Mobile 完整攻略與入坑指南（2026）](https://www.cccloudphone.com/news/2042062604050468865.html)
 
+## 最新改版情報（2026-07 追加，見 research/）
+- [Betanews - 신규 클래스 기사（新職業 騎士）](https://www.betanews.net/article/view/beta202604230077)
+- [바이라인네트워크 - 신규 클래스 기사 추가](https://byline.network/2026/04/23-583/)
+- [Betanews - 시즌2 빛과 어둠（Season 2 光與暗）](https://www.betanews.net/article/view/beta202606260083)
+- [Inven Global - Season 2: New Hunting Grounds to Growth Elements](https://www.invenglobal.com/articles/22969/mabinogi-mobile-season-2-from-new-hunting-grounds-to-growth-elements)
+- [Inven Global - Launches Second Season: Light and Darkness](https://www.invenglobal.com/articles/23182/mabinogi-mobile-launches-second-season-update-light-and-darkness)
+- [Newspim - 최고 레벨 100 확장（等級上限 100）](https://www.newspim.com/news/view/20260622000986)
+- [Nexon 官方公告（마비노기 모바일）](https://mabinogimobile.nexon.com/News/Notice)
+- [Nexon Newsroom - 2026 일본 글로벌 확장](https://kr-newsroom.nexon.com/inside-game/3296145)
+- [게임인사이트 - 일본 진출 글로벌 흥행 발판](https://www.gameinsight.co.kr/news/articleView.html?idxno=36406)
+- [GamingonPhone - Taiwan July 2026 + Japan plans](https://gamingonphone.com/news/mabinogi-mobile-continues-global-expansion-as-nexon-prepares-a-taiwan-launch-in-july-2026-alongside-japan-plans/)
+- [台灣 Nexon 官方事前預約頁](https://tw.nexon.com/mabinogimobile/preregistration/)
+- [HN 玩新聞 - 台港澳 7/22 完整情報](https://hngameguide.com/mabinogi-mobile-taiwan-july22-2026-pre-registration-jobs-life-guide-zh/)
+- [巴哈 GNN - 7/22 台港澳正式上市](https://gnn.gamer.com.tw/detail.php?sn=307096)
+
 ## 備註
 - 職業 tier / 強度屬社群人氣與版本評價，會隨賽季平衡改動，非絕對標準。
-- 台港版本截至蒐集日尚無官方在地化上線公告，實裝內容以韓國版為準。
+- 韓服（一手基準）截至 2026-07 已推進至 **Season 2「光與暗」**：等級上限 100、符文 10 星、戰士系 4 職（+騎士）、Soulstream 伺服器共養系統。
+- 台港澳為**獨立在地化版本**（2026-07-22 上線），內容進度大機率落後韓服，實裝以開服當下版本為準——攻略需分「台服現行 / 韓服前瞻」兩層。
+- 未來新職業路線圖相關內容多屬**客戶端洩漏、未經官方證實**，僅作內部研究參考（見本機 `data/research/`，未進公開 repo），不進正式攻略。
