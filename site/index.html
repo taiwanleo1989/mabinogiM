@@ -147,16 +147,18 @@ section{padding:70px 0;scroll-margin-top:80px}
 .chip .k{opacity:.6;font-size:9px;margin-left:4px}
 .filter-label{color:var(--muted);font-size:12px;letter-spacing:2px;margin-right:4px}
 
-.class-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.ccard{border-radius:var(--r);padding:13px 10px 15px;cursor:pointer;position:relative;overflow:hidden;
+/* 6 系橫排＝6 欄、每系 3 職直疊＝3 列（grid-auto-flow:column 讓同系落在同一直行）*/
+.class-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-template-rows:repeat(3,auto);
+  grid-auto-flow:column;gap:9px}
+.ccard{border-radius:13px;padding:12px 6px 13px;cursor:pointer;position:relative;overflow:hidden;
   border:1px solid var(--line-soft);background:linear-gradient(180deg,var(--panel),var(--bg2));
   transition:.25s;display:flex;flex-direction:column;align-items:center;text-align:center}
 .ccard::before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:var(--fc,#888)}
 .ccard:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--line)}
-.ccard h4{font-size:17px;margin:5px 0 0;color:#fff;line-height:1.25}
-.ccard h4 .ko{font-size:.6em;color:var(--muted);font-weight:400;letter-spacing:.2px;margin-left:6px;vertical-align:1px;white-space:nowrap}
-.bn{position:absolute;top:9px;right:9px;width:24px;height:24px;border-radius:8px;display:grid;
-  place-items:center;font-weight:800;font-size:11px;font-family:Georgia,serif;color:#12131a}
+.ccard h4{font-size:15px;margin:4px 0 0;color:#fff;line-height:1.22}
+.ccard h4 .ko{display:block;font-size:.66em;color:var(--muted);font-weight:400;letter-spacing:.2px;margin:1px 0 0;white-space:nowrap}
+.bn{position:absolute;top:7px;right:7px;width:22px;height:22px;border-radius:7px;display:grid;
+  place-items:center;font-weight:800;font-size:10px;font-family:Georgia,serif;color:#12131a}
 .bn.S{background:linear-gradient(135deg,#ff8a8a,#ff5252)}
 .bn.A{background:linear-gradient(135deg,#ffd08a,#ffab40)}
 .bn.B{background:linear-gradient(135deg,#8fdcff,#43b8f0)}
@@ -189,9 +191,9 @@ section{padding:70px 0;scroll-margin-top:80px}
 .cycle-title{color:var(--gold-soft);font-size:13px;font-weight:700;letter-spacing:1px;margin-bottom:6px}
 .cycle-box p{color:var(--ink-dim);font-size:14px;line-height:1.7}
 /* ---------- Emblem (自製職業徽章) ---------- */
-.ccard .cart{height:92px;width:100%;margin:0 0 4px;border-radius:12px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;transition:transform .3s ease}
+.ccard .cart{height:70px;width:100%;margin:0 0 3px;border-radius:12px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;transition:transform .3s ease}
 .ccard:hover .cart{transform:translateY(-3px)}
-.ccard .cart.cart-emb svg{width:74px;height:86px;display:block}
+.ccard .cart.cart-emb svg{width:58px;height:67px;display:block}
 .mMedia{display:flex;flex-direction:column;align-items:center;gap:10px;margin:-6px -6px 18px;padding:8px 0 4px;border-radius:14px}
 .memb{height:200px;display:flex;align-items:flex-end;justify-content:center}
 .memb svg{width:104px;height:120px;display:block}
@@ -420,23 +422,31 @@ footer .warn{font-size:12px;color:#c78; margin-top:8px}
   .path{grid-template-columns:1fr}
   .arrow{transform:rotate(90deg);padding:6px 0}
   .daily-cols{grid-template-columns:1fr}
-  /* 職業維持每系 3 欄 = 6 列，縮小以容納 */
-  .class-grid{gap:9px}
-  .ccard{padding:11px 8px 12px}
-  .ccard .cart{height:74px;margin:0 0 3px}
-  .ccard .cart.cart-emb svg{width:60px;height:70px}
-  .ccard h4{font-size:14.5px}
+  /* 職業 6 系橫排 = 6 欄 3 列，隨螢幕縮小 */
+  .class-grid{gap:7px}
+  .ccard{padding:9px 4px 10px}
+  .ccard .cart{height:54px;margin:0 0 2px}
+  .ccard .cart.cart-emb svg{width:44px;height:51px}
+  .ccard h4{font-size:12px}
   .mech-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:520px){
-  .class-grid{gap:7px}
-  .ccard{padding:9px 6px 10px}
-  .ccard .cart{height:58px;margin:0 0 2px}
-  .ccard .cart.cart-emb svg{width:48px;height:56px}
-  .ccard h4{font-size:12px;margin:3px 0 0}
-  .ccard h4 .ko{font-size:.58em;margin-left:4px}
-  .ccard .bn{width:19px;height:19px;font-size:9px;top:6px;right:6px;border-radius:6px}
+  .class-grid{gap:5px}
+  .ccard{padding:7px 3px 8px}
+  .ccard .cart{height:44px;margin:0 0 2px}
+  .ccard .cart.cart-emb svg{width:36px;height:42px}
+  .ccard h4{font-size:10px;margin:2px 0 0;line-height:1.15}
+  .ccard h4 .ko{font-size:.62em}
+  .ccard .bn{width:16px;height:16px;font-size:8px;top:4px;right:4px;border-radius:5px}
   .mech-grid{grid-template-columns:1fr}
+}
+@media(max-width:400px){
+  .class-grid{gap:4px}
+  .ccard{padding:6px 2px 7px}
+  .ccard .cart{height:38px}
+  .ccard .cart.cart-emb svg{width:30px;height:35px}
+  .ccard h4{font-size:9px}
+  .ccard h4 .ko{font-size:.6em}
 }
 @media(max-width:360px){
   .hud{gap:10px;padding:10px 12px}
