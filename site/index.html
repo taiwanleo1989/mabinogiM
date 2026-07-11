@@ -144,7 +144,7 @@ section{padding:70px 0;scroll-margin-top:80px}
   color:var(--ink-dim);font-size:13.5px;transition:.2s;background:rgba(255,255,255,.02)}
 .chip:hover{color:var(--gold-soft);border-color:var(--line)}
 .chip.on{background:linear-gradient(120deg,var(--gold),var(--gold-deep));color:#2a1f05;border-color:transparent;font-weight:700}
-.chip .k{opacity:.6;font-size:11px;margin-left:4px}
+.chip .k{opacity:.6;font-size:9px;margin-left:4px}
 .filter-label{color:var(--muted);font-size:12px;letter-spacing:2px;margin-right:4px}
 
 .class-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
@@ -155,7 +155,7 @@ section{padding:70px 0;scroll-margin-top:80px}
 .ccard:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--line)}
 .ccard .fam{font-size:12px;color:var(--muted);letter-spacing:1px}
 .ccard h4{font-size:20px;margin:4px 0 2px;color:#fff}
-.ccard .ko{font-size:12px;color:var(--muted)}
+.ccard h4 .ko{font-size:.64em;color:var(--muted);font-weight:400;letter-spacing:.2px;margin-left:7px;vertical-align:1px;white-space:nowrap}
 .ccard .wp{margin-top:auto;font-size:13px;color:var(--ink-dim)}
 .ccard .role-tag{display:inline-block;font-size:12px;color:var(--gold-soft);margin-top:8px;
   padding:3px 9px;border:1px solid var(--line);border-radius:8px}
@@ -214,7 +214,7 @@ section{padding:70px 0;scroll-margin-top:80px}
 .skill .kk .sic{width:22px;height:22px;color:var(--gold-soft)}
 .skill .kk em{font-family:Georgia,serif;font-weight:800;font-size:11px;color:var(--gold);font-style:normal;letter-spacing:.3px;text-align:center;line-height:1}
 .skill .sn{color:#fff;font-weight:600;font-size:14.5px}
-.skill .sn .ko{color:var(--muted);font-size:12px;font-weight:400;margin-left:6px}
+.skill .sn .ko{color:var(--muted);font-size:9.7px;font-weight:400;margin-left:6px}
 .skill .se{color:var(--ink-dim);font-size:13.5px;line-height:1.65;margin-top:3px}
 .skills-todo{color:var(--muted);font-size:13.5px;line-height:1.65}
 .x{position:absolute;top:16px;right:16px;background:rgba(0,0,0,.3);border:none;color:#fff;
@@ -252,6 +252,8 @@ section{padding:70px 0;scroll-margin-top:80px}
   color:var(--gold-soft);letter-spacing:1px;margin:4px 0 2px;text-shadow:0 0 24px rgba(212,175,84,.28)}
 .cd .cd-sub{display:block;font-family:system-ui,sans-serif;font-size:13px;font-weight:600;
   letter-spacing:2px;color:var(--muted);margin-top:9px;text-shadow:none}
+.cd .cd-lead{font-family:"Microsoft JhengHei","PingFang TC",system-ui,sans-serif;font-size:.38em;font-weight:700;
+  color:var(--gold);letter-spacing:2px;margin:0 .14em;vertical-align:.2em;text-shadow:none}
 .cd.live{color:#5fd2a1;text-shadow:0 0 24px rgba(95,210,161,.32)}
 .pl-steps{grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:24px}
 .pl-step .pl-cta{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;
@@ -266,7 +268,12 @@ section{padding:70px 0;scroll-margin-top:80px}
 .preorder .po-ic svg{width:22px;height:22px}
 .preorder h4{color:#fff;font-size:16px;margin-bottom:3px}
 .preorder p{color:var(--ink-dim);font-size:13.5px}
-.preorder .po-note{color:var(--muted);font-size:12px;margin-top:6px}
+.preorder .po-links{display:flex;flex-wrap:wrap;gap:9px;margin-top:12px}
+.preorder .po-link{display:inline-flex;align-items:baseline;gap:5px;font-size:13px;font-weight:600;color:var(--gold-soft);
+  border:1px solid var(--line);border-radius:9px;padding:7px 14px;background:rgba(231,198,106,.05);transition:.15s;white-space:nowrap}
+.preorder .po-link:hover{background:rgba(231,198,106,.14);border-color:var(--gold-soft);transform:translateY(-1px)}
+.preorder .po-link .ko{font-size:.66em;color:var(--muted);font-weight:400}
+.preorder .po-note{color:var(--muted);font-size:12px;margin-top:9px}
 
 /* ---------- Quest checklist ---------- */
 .quest{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line-soft);
@@ -356,7 +363,7 @@ footer .warn{font-size:12px;color:#c78; margin-top:8px}
 .equip-notes{grid-template-columns:repeat(auto-fit,minmax(255px,1fr));margin-top:15px}
 .mech-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
 .mech h3{color:var(--gold-soft);font-size:17px;display:flex;align-items:baseline;gap:8px;margin-bottom:8px}
-.mech h3 .ko{font-size:12px;color:var(--muted);font-weight:400}
+.mech h3 .ko{font-size:11px;color:var(--muted);font-weight:400}
 .mech p{color:var(--ink-dim);font-size:14px}
 
 /* ---------- Regions & NPC ---------- */
@@ -377,7 +384,7 @@ footer .warn{font-size:12px;color:#c78; margin-top:8px}
 .npc .av{width:44px;height:44px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;font-size:22px;
   background:radial-gradient(circle at 30% 25%,var(--gold-soft),var(--gold-deep));color:#3a2c07}
 .npc b{color:#fff;font-size:15.5px}
-.npc .en{color:var(--muted);font-size:12px;font-weight:400}
+.npc .ko{color:var(--muted);font-size:10px;font-weight:400;margin-left:6px}
 .npc .av .isvg{width:26px;height:26px;color:var(--gold-soft)}
 .npc .av.art{background:linear-gradient(180deg,#2a2f3a,#1b1e26);overflow:hidden;padding:0;border:1px solid var(--line-soft)}
 .npc .av.art img{width:100%;height:100%;object-fit:cover;object-position:50% 12%}
@@ -396,7 +403,7 @@ footer .warn{font-size:12px;color:#c78; margin-top:8px}
 .task .ck{width:9px;height:9px;border-radius:50%;background:var(--muted);margin-top:8px;flex-shrink:0}
 .task.pri .ck{background:#4be08a;box-shadow:0 0 8px #4be08a}
 .task b{color:#fff;font-size:14.5px}
-.task .ko{color:var(--muted);font-size:11px;margin-left:5px;font-weight:400}
+.task .ko{color:var(--muted);font-size:9.5px;margin-left:5px;font-weight:400}
 .task p{color:var(--ink-dim);font-size:12.5px;margin-top:2px}
 .pri-flag{margin-left:auto;font-size:10px;color:#4be08a;border:1px solid rgba(75,224,138,.4);border-radius:6px;padding:1px 6px;align-self:center;flex-shrink:0}
 .order-note{margin-top:18px;padding:14px 18px;border-left:3px solid var(--gold);background:rgba(231,198,106,.05);
@@ -434,7 +441,7 @@ footer .warn{font-size:12px;color:#c78; margin-top:8px}
   .ccard .cart.cart-emb svg{width:56px;height:65px}
   .ccard .fam{font-size:9.5px;letter-spacing:0}
   .ccard h4{font-size:13px;margin:3px 0 1px}
-  .ccard .ko{font-size:10px}
+  .ccard h4 .ko{font-size:.6em;margin-left:5px}
   .ccard .role-tag{font-size:10px;padding:2px 6px;margin-top:6px}
   .ccard .cyc-mark{font-size:9px;padding:2px 5px;margin-top:6px;margin-left:0}
   .ccard .wp{font-size:11px}
@@ -523,7 +530,7 @@ footer .warn{font-size:12px;color:#c78; margin-top:8px}
     <h1>踏入 <span class="hl">艾琳</span> 的世界</h1>
     <p class="hero-tagline">你的第一趟冒險，從這裡開始</p>
     <p class="lead">《瑪奇 Mobile》是一款高自由度的開放世界生活 MMORPG。換一把武器就換一種職業，也可以只當釣魚、料理、演奏的生活玩家。這份指南把全球（尤其韓國）的一手資料整理成新手也能秒懂的攻略。</p>
-    <p class="kicker">마비노기 모바일 · Mabinogi Mobile · devCAT / Nexon</p>
+    <p class="kicker">마비노기 모바일 · devCAT / Nexon</p>
     <div class="cta">
       <a href="#classes" class="btn primary"><svg class="isvg btnico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15.5H6.5A1.5 1.5 0 0 0 5 20z"/><path d="M5 4.5V20M9 7h6M9 10.5h6" stroke-width="1.5"/></svg> 職業圖鑑</a>
       <a href="#life" class="btn ghost"><svg class="isvg btnico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21C12 13 15 7.5 20.5 5c-.7 8.2-3.8 13.4-8.5 16z"/><path d="M12.5 13.5C10.7 10.8 8 9.5 4.5 9.5c.9 5 3.6 7.5 7 8" fill="none"/></svg> 生活玩法</a>
@@ -554,7 +561,7 @@ footer .warn{font-size:12px;color:#c78; margin-top:8px}
 <!-- ABOUT -->
 <section id="about">
   <div class="reveal">
-    <div class="eyebrow">What is this game</div>
+    <div class="eyebrow">게임 소개</div>
     <h2 class="sec-title">這是一款什麼樣的遊戲？</h2>
     <p class="sec-sub">一句話：<b style="color:var(--gold-soft)">在同一片艾琳世界，用你喜歡的方式生活</b>——想戰鬥就戰鬥，想釣魚就釣魚。它延續 PC 版《瑪奇》的女神敘事，是同 IP 的全新作品，不是舊版移植。</p>
   </div>
@@ -565,7 +572,7 @@ footer .warn{font-size:12px;color:#c78; margin-top:8px}
 <!-- CLASSES -->
 <section id="classes">
   <div class="reveal">
-    <div class="eyebrow">Character Select</div>
+    <div class="eyebrow">직업 도감</div>
     <h2 class="sec-title">職業圖鑑 · 18 種轉職</h2>
     <p class="sec-sub">選哪個開局都沒關係！起始職業<b style="color:var(--gold-soft)">不會限制</b>你之後能轉的職業。換上不同武器就能即時切換職業，一隻角色可以體驗全部。點卡片看詳情，右上角是<b>新手友善度</b>（S 最好上手）。</p>
   </div>
@@ -590,7 +597,7 @@ footer .warn{font-size:12px;color:#c78; margin-top:8px}
 <!-- COMBAT SYSTEM -->
 <section id="combat">
   <div class="reveal">
-    <div class="eyebrow">Combat System</div>
+    <div class="eyebrow">전투 시스템</div>
     <h2 class="sec-title">戰鬥與技能系統</h2>
     <p class="sec-sub" id="combatIntro"></p>
   </div>
@@ -601,7 +608,7 @@ footer .warn{font-size:12px;color:#c78; margin-top:8px}
 <!-- QUEST CHECKLIST -->
 <section id="quest">
   <div class="reveal">
-    <div class="eyebrow">Quest Log</div>
+    <div class="eyebrow">초보자 퀘스트</div>
     <h2 class="sec-title">新手必做任務清單</h2>
     <p class="sec-sub">照著打勾就對了。進度會自動記在你的瀏覽器裡，下次打開還在。這些是最容易被忽略、卻直接影響成長效率的關鍵。</p>
   </div>
@@ -619,7 +626,7 @@ footer .warn{font-size:12px;color:#c78; margin-top:8px}
 <!-- DAILY -->
 <section id="daily">
   <div class="reveal">
-    <div class="eyebrow">Daily & Weekly</div>
+    <div class="eyebrow">일일 · 주간 숙제</div>
     <h2 class="sec-title">每日／每週作業行事曆</h2>
     <p class="sec-sub" id="dailyIntro"></p>
   </div>
@@ -633,7 +640,7 @@ footer .warn{font-size:12px;color:#c78; margin-top:8px}
 <!-- LIFE -->
 <section id="life">
   <div class="reveal">
-    <div class="eyebrow">Life Skills</div>
+    <div class="eyebrow">생활 콘텐츠</div>
     <h2 class="sec-title">生活玩法 · 不打怪也能玩</h2>
     <p class="sec-sub" id="lifeIntro"></p>
   </div>
@@ -644,7 +651,7 @@ footer .warn{font-size:12px;color:#c78; margin-top:8px}
 <!-- EQUIPMENT -->
 <section id="equip">
   <div class="reveal">
-    <div class="eyebrow">Gear & Runes</div>
+    <div class="eyebrow">장비 · 룬</div>
     <h2 class="sec-title">裝備與符文（룬）系統</h2>
     <p class="sec-sub" id="equipIntro"></p>
   </div>
@@ -657,7 +664,7 @@ footer .warn{font-size:12px;color:#c78; margin-top:8px}
 <!-- CURRENCY -->
 <section id="currency">
   <div class="reveal">
-    <div class="eyebrow">Economy</div>
+    <div class="eyebrow">재화 시스템</div>
     <h2 class="sec-title">貨幣系統一次搞懂</h2>
     <p class="sec-sub">搞懂四種貨幣，新手最不會卡關。<b style="color:var(--gold-soft)">銀幣</b>是進地下城的關鍵，記得每天在商店補。</p>
   </div>
@@ -668,7 +675,7 @@ footer .warn{font-size:12px;color:#c78; margin-top:8px}
 <!-- REGIONS -->
 <section id="regions">
   <div class="reveal">
-    <div class="eyebrow">World & NPCs</div>
+    <div class="eyebrow">월드 · NPC</div>
     <h2 class="sec-title">艾琳地圖與重要 NPC</h2>
     <p class="sec-sub" id="regionIntro"></p>
   </div>
@@ -681,7 +688,7 @@ footer .warn{font-size:12px;color:#c78; margin-top:8px}
 <!-- SYSTEMS -->
 <section id="systems">
   <div class="reveal">
-    <div class="eyebrow">Core Systems</div>
+    <div class="eyebrow">핵심 시스템</div>
     <h2 class="sec-title">你一定要懂的系統機制</h2>
     <p class="sec-sub">轉職、重生、戰鬥內容——這些是瑪奇 Mobile 的核心循環。</p>
   </div>
@@ -692,7 +699,7 @@ footer .warn{font-size:12px;color:#c78; margin-top:8px}
 <!-- NEWS / VERSION -->
 <section id="news">
   <div class="reveal">
-    <div class="eyebrow">Version & Roadmap</div>
+    <div class="eyebrow">업데이트 소식</div>
     <h2 class="sec-title">版本情報 · 最新動態</h2>
     <p class="sec-sub" id="newsIntro"></p>
   </div>
@@ -889,8 +896,8 @@ if(PL){
   const launch=new Date(PL.launch+"T00:00:00");
   const days=Math.round((launch-today)/86400000);
   const cd=$("#countdown"),dot=PL.launch.replace(/-/g,".");
-  if(days>0){cd.innerHTML=`D-${days}<span class="cd-sub">距 ${dot} 正式開服</span>`;}
-  else if(days===0){cd.className="cd live";cd.innerHTML=`D-DAY<span class="cd-sub">今天開服！</span>`;}
+  if(days>0){cd.innerHTML=`<span class="cd-lead">倒數</span>${days}<span class="cd-lead">天</span><span class="cd-sub">距 ${dot} 正式開服</span>`;}
+  else if(days===0){cd.className="cd live";cd.innerHTML=`今天開服<span class="cd-sub">台港澳 ${dot} 上線</span>`;}
   else{cd.className="cd live";cd.innerHTML=`已開服<span class="cd-sub">台港澳於 ${dot} 上線</span>`;}
   PL.steps.forEach((s,i)=>{
     $("#prelaunchSteps").appendChild(el("div","step pl-step",
@@ -899,7 +906,8 @@ if(PL){
   const poEnd=new Date(PL.preorderEnd+"T23:59:59");
   if(PL.preorder&&new Date()<=poEnd){
     const po=PL.preorder;
-    $("#preorderBox").innerHTML=`<div class="preorder"><div class="po-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v9h14v-9M12 8v13M12 8S9.5 3 7 4.5 8 8 12 8zM12 8s2.5-5 5-3.5S16 8 12 8z"/></svg></div><div><h4>${po.title}</h4><p>${po.desc}</p><p class="po-note">${po.note}</p></div></div>`;
+    const links=(po.links||[]).map(l=>`<a class="po-link" href="${l.url}" target="_blank" rel="noopener">${l.label}${l.ko?`<span class="ko">${l.ko}</span>`:''} ↗</a>`).join("");
+    $("#preorderBox").innerHTML=`<div class="preorder"><div class="po-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v9h14v-9M12 8v13M12 8S9.5 3 7 4.5 8 8 12 8zM12 8s2.5-5 5-3.5S16 8 12 8z"/></svg></div><div><h4>${po.title}</h4><p>${po.desc}</p>${links?`<div class="po-links">${links}</div>`:''}<p class="po-note">${po.note}</p></div></div>`;
   }
 }
 // features
@@ -926,7 +934,7 @@ DATA.families.forEach(fam=>{
     card.innerHTML=`<div class="bn ${cl.bn}">${cl.bn}</div>
       ${cardMedia(fam,cl)}
       <div class="fam">${iconSvg(fam.icon)} ${fam.name}</div>
-      <h4>${cl.name}</h4><div class="ko">${cl.korean}</div>
+      <h4>${cl.name}<span class="ko">${cl.korean}</span></h4>
       <div class="role-tag">${cl.role}</div>${cl.cycle?`<span class="cyc-mark">${iconSvg('swords')} 有技能循環</span>`:''}
       <div class="wp">${iconSvg('blade')} ${cl.weapon}</div>`;
     card.onclick=()=>openModal(fam,cl);
@@ -1006,7 +1014,7 @@ DATA.places.forEach(p=>{
   const badge=p.official?`<span class="rbadge ok" title="已對照台版官方世界地圖">官方名</span>`
     :p.pending?`<span class="rbadge wait" title="官方尚未公布正式譯名，暫用社群慣用名，待 7/22 台版上線後校正">官方名待確認</span>`:"";
   const c=el("div","card region reveal",
-    `<span class="tag">${p.tag}</span><h3>${p.name}<span class="en">${p.en}</span>${badge}</h3>
+    `<span class="tag">${p.tag}</span><h3>${p.name}${badge}</h3>
      <div class="ko">${p.ko}</div><p>${p.desc}</p>`);
   $("#regionGrid").appendChild(c);
 });
@@ -1015,7 +1023,7 @@ DATA.npcs.forEach(n=>{
     :`<div class="av">${iconSvg('person')}</div>`;
   const offTag=n.art?`<span class="off-tag" title="來自台版官方 NPC 介紹頁的立繪與設定">官方</span>`:"";
   const c=el("div","npc",
-    `${av}<div><b>${n.name}</b><span class="en">${n.en}</span>${offTag}<span class="where">${iconSvg('pin')} ${n.where}</span><p>${n.role}</p></div>`);
+    `${av}<div><b>${n.name}</b><span class="ko">${n.ko}</span>${offTag}<span class="where">${iconSvg('pin')} ${n.where}</span><p>${n.role}</p></div>`);
   $("#npcList").appendChild(c);
 });
 
