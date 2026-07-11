@@ -246,6 +246,27 @@ section{padding:70px 0;scroll-margin-top:80px}
 .step .ko{color:var(--muted);font-size:12px;margin-bottom:6px}
 .step p{color:var(--ink-dim);font-size:13.5px}
 .arrow{display:grid;place-items:center;color:var(--gold);font-size:24px;padding:0 6px}
+/* 開服前準備 */
+#prelaunch .pl-head{text-align:center}
+.cd{font-family:Georgia,serif;font-size:clamp(38px,7vw,66px);font-weight:700;line-height:1;
+  color:var(--gold-soft);letter-spacing:1px;margin:4px 0 2px;text-shadow:0 0 24px rgba(212,175,84,.28)}
+.cd .cd-sub{display:block;font-family:system-ui,sans-serif;font-size:13px;font-weight:600;
+  letter-spacing:2px;color:var(--muted);margin-top:9px;text-shadow:none}
+.cd.live{color:#5fd2a1;text-shadow:0 0 24px rgba(95,210,161,.32)}
+.pl-steps{grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:24px}
+.pl-step .pl-cta{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;
+  color:var(--gold-soft);border:1px solid var(--line);border-radius:9px;padding:7px 14px;margin-top:14px;transition:.15s}
+.pl-step .pl-cta:hover{background:rgba(212,175,84,.1);border-color:var(--gold-soft)}
+.pl-step .pl-cta svg{width:14px;height:14px}
+.preorder{display:flex;gap:15px;align-items:flex-start;margin-top:22px;
+  background:linear-gradient(180deg,rgba(212,175,84,.09),rgba(212,175,84,.02));
+  border:1px solid rgba(212,175,84,.3);border-radius:16px;padding:17px 20px}
+.preorder .po-ic{flex-shrink:0;width:40px;height:40px;border-radius:11px;display:grid;place-items:center;
+  background:radial-gradient(circle at 30% 25%,var(--gold-soft),var(--gold-deep));color:#3a2c07}
+.preorder .po-ic svg{width:22px;height:22px}
+.preorder h4{color:#fff;font-size:16px;margin-bottom:3px}
+.preorder p{color:var(--ink-dim);font-size:13.5px}
+.preorder .po-note{color:var(--muted);font-size:12px;margin-top:6px}
 
 /* ---------- Quest checklist ---------- */
 .quest{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line-soft);
@@ -478,6 +499,7 @@ footer .warn{font-size:12px;color:#c78; margin-top:8px}
     </a>
     <button class="menu-btn" aria-label="選單" onclick="document.getElementById('nav').classList.toggle('show')"><svg class="isvg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke-width="2.2"/></svg></button>
     <nav id="nav" onclick="this.classList.remove('show')">
+      <a href="#prelaunch">開服準備</a>
       <a href="#about">遊戲介紹</a>
       <a href="#classes">職業圖鑑</a>
       <a href="#combat">戰鬥系統</a>
@@ -516,6 +538,19 @@ footer .warn{font-size:12px;color:#c78; margin-top:8px}
 </div>
 
 <main>
+<!-- PRE-LAUNCH 開服前準備 -->
+<section id="prelaunch">
+  <div class="reveal pl-head">
+    <div class="eyebrow" id="plKicker">Countdown</div>
+    <div class="cd" id="countdown"></div>
+    <h2 class="sec-title" id="plTitle"></h2>
+    <p class="sec-sub" id="plIntro"></p>
+  </div>
+  <div class="grid pl-steps reveal" id="prelaunchSteps"></div>
+  <div class="reveal" id="preorderBox"></div>
+</section>
+<div class="divider"></div>
+
 <!-- ABOUT -->
 <section id="about">
   <div class="reveal">
@@ -844,6 +879,29 @@ fetch("game-data.json",{cache:"no-cache"})
   .catch(err=>{console.error("資料載入失敗：",err);const b=$("#loadError");if(b){b.style.display="block";$("#loadErrorMsg").textContent=String(err);}});
 
 function renderAll(){
+// 開服前準備（倒數＋三步整合）
+const PL=DATA.prelaunch;
+if(PL){
+  $("#plKicker").textContent=PL.kicker;
+  $("#plTitle").textContent=PL.title;
+  $("#plIntro").textContent=PL.intro;
+  const today=new Date();today.setHours(0,0,0,0);
+  const launch=new Date(PL.launch+"T00:00:00");
+  const days=Math.round((launch-today)/86400000);
+  const cd=$("#countdown"),dot=PL.launch.replace(/-/g,".");
+  if(days>0){cd.innerHTML=`D-${days}<span class="cd-sub">距 ${dot} 正式開服</span>`;}
+  else if(days===0){cd.className="cd live";cd.innerHTML=`D-DAY<span class="cd-sub">今天開服！</span>`;}
+  else{cd.className="cd live";cd.innerHTML=`已開服<span class="cd-sub">台港澳於 ${dot} 上線</span>`;}
+  PL.steps.forEach((s,i)=>{
+    $("#prelaunchSteps").appendChild(el("div","step pl-step",
+      `<div class="n">${i+1}</div><h4>${s.title}</h4><div class="ko">${s.ko}</div><p>${s.desc}</p><a class="pl-cta" href="${s.href}">${s.cta} →</a>`));
+  });
+  const poEnd=new Date(PL.preorderEnd+"T23:59:59");
+  if(PL.preorder&&new Date()<=poEnd){
+    const po=PL.preorder;
+    $("#preorderBox").innerHTML=`<div class="preorder"><div class="po-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v9h14v-9M12 8v13M12 8S9.5 3 7 4.5 8 8 12 8zM12 8s2.5-5 5-3.5S16 8 12 8z"/></svg></div><div><h4>${po.title}</h4><p>${po.desc}</p><p class="po-note">${po.note}</p></div></div>`;
+  }
+}
 // features
 DATA.features.forEach(f=>{
   const c=el("div","card feat reveal",`<div class="ic">${iconSvg(f.icon)}</div><h3>${f.title}</h3><p>${f.desc}</p>`);
