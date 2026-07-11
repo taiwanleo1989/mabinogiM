@@ -346,6 +346,10 @@ footer .warn{font-size:12px;color:#c78; margin-top:8px}
 .region h3 .en{font-size:12px;color:var(--muted);font-weight:400;margin-left:6px}
 .region .ko{font-size:12px;color:var(--muted);margin-bottom:6px}
 .region p{color:var(--ink-dim);font-size:13.5px}
+.region .rbadge{display:inline-block;font-size:10.5px;font-weight:600;letter-spacing:.3px;border-radius:6px;
+  padding:1.5px 7px;margin-left:7px;vertical-align:2px}
+.region .rbadge.ok{color:#8fe6bf;background:rgba(95,210,161,.12);border:1px solid rgba(95,210,161,.35)}
+.region .rbadge.wait{color:var(--muted);background:rgba(255,255,255,.04);border:1px dashed var(--line)}
 .npc-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:16px}
 .npc{display:flex;gap:14px;align-items:flex-start;background:linear-gradient(180deg,var(--panel),var(--bg2));
   border:1px solid var(--line-soft);border-radius:14px;padding:15px 17px}
@@ -354,6 +358,10 @@ footer .warn{font-size:12px;color:#c78; margin-top:8px}
 .npc b{color:#fff;font-size:15.5px}
 .npc .en{color:var(--muted);font-size:12px;font-weight:400}
 .npc .av .isvg{width:26px;height:26px;color:var(--gold-soft)}
+.npc .av.art{background:linear-gradient(180deg,#2a2f3a,#1b1e26);overflow:hidden;padding:0;border:1px solid var(--line-soft)}
+.npc .av.art img{width:100%;height:100%;object-fit:cover;object-position:50% 12%}
+.npc .off-tag{display:inline-block;font-size:10px;font-weight:600;color:#3a2c07;background:var(--gold-soft);
+  border-radius:5px;padding:0 6px;margin-left:6px;vertical-align:2px}
 .npc .where{display:inline-block;font-size:11px;color:var(--gold-soft);margin-left:6px}
 .npc .where .isvg{width:12px;height:12px;vertical-align:-1.5px;margin-right:1px}
 .npc p{color:var(--ink-dim);font-size:13px;margin-top:3px}
@@ -937,14 +945,19 @@ DATA.mech.forEach(m=>{
 // regions / npc
 $("#regionIntro").textContent=DATA.regionIntro;
 DATA.places.forEach(p=>{
+  const badge=p.official?`<span class="rbadge ok" title="已對照台版官方世界地圖">官方名</span>`
+    :p.pending?`<span class="rbadge wait" title="官方尚未公布正式譯名，暫用社群慣用名，待 7/22 台版上線後校正">官方名待確認</span>`:"";
   const c=el("div","card region reveal",
-    `<span class="tag">${p.tag}</span><h3>${p.name}<span class="en">${p.en}</span></h3>
+    `<span class="tag">${p.tag}</span><h3>${p.name}<span class="en">${p.en}</span>${badge}</h3>
      <div class="ko">${p.ko}</div><p>${p.desc}</p>`);
   $("#regionGrid").appendChild(c);
 });
 DATA.npcs.forEach(n=>{
+  const av=n.art?`<div class="av art"><img src="${n.art}" alt="${n.name} 官方立繪" loading="lazy"></div>`
+    :`<div class="av">${iconSvg('person')}</div>`;
+  const offTag=n.art?`<span class="off-tag" title="來自台版官方 NPC 介紹頁的立繪與設定">官方</span>`:"";
   const c=el("div","npc",
-    `<div class="av">${iconSvg('person')}</div><div><b>${n.name}</b><span class="en">${n.en}</span><span class="where">${iconSvg('pin')} ${n.where}</span><p>${n.role}</p></div>`);
+    `${av}<div><b>${n.name}</b><span class="en">${n.en}</span>${offTag}<span class="where">${iconSvg('pin')} ${n.where}</span><p>${n.role}</p></div>`);
   $("#npcList").appendChild(c);
 });
 

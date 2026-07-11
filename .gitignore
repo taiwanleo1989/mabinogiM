@@ -6,6 +6,7 @@ desktop.ini
 # 編輯器
 .vscode/
 .idea/
+.claude/
 
 # 暫存
 *.log
