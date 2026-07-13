@@ -512,7 +512,8 @@ footer .warn{font-size:12px;color:#c78; margin-top:8px}
 .eff-rank{flex:none;width:20px;height:20px;border-radius:6px;display:grid;place-items:center;
   font-size:11px;font-weight:700;color:var(--bg);background:var(--eg)}
 .eff-name{flex:1;font-size:13px;color:var(--ink)}
-.eff-won{font-size:12.5px;font-weight:700;color:var(--gold-soft);font-variant-numeric:tabular-nums;letter-spacing:.2px}
+.eff-won{display:flex;flex-direction:column;align-items:flex-end;text-align:right;font-size:12.5px;font-weight:700;color:var(--gold-soft);font-variant-numeric:tabular-nums;letter-spacing:.2px}
+.eff-twd{font-size:10.5px;font-weight:600;color:var(--muted);margin-top:1px}
 .avoid-list{display:flex;flex-direction:column;gap:9px}
 .avoid-card{padding:11px 14px;border-radius:12px;background:rgba(231,120,120,.06);border:1px solid rgba(231,120,120,.24)}
 .av-head{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:4px}
@@ -1045,7 +1046,7 @@ if(DATA.spending){
   });
   (sp.efficiency||[]).forEach(e=>{
     $("#spendEff").appendChild(el("div","eff-row reveal g-"+e.grade,
-      `<span class="eff-rank">${e.rank}</span><span class="eff-name">${e.name}</span><span class="eff-won">${e.won}</span>`));
+      `<span class="eff-rank">${e.rank}</span><span class="eff-name">${e.name}</span><span class="eff-won">${e.won}${e.twd?`<span class="eff-twd">${e.twd}</span>`:""}</span>`));
   });
   (sp.avoid||[]).forEach(a=>{
     $("#spendAvoid").appendChild(el("div","avoid-card reveal",
