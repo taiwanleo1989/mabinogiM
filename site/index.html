@@ -456,23 +456,32 @@ footer .warn{font-size:12px;color:#c78; margin-top:8px}
   .hero .runeframe{padding:32px 20px}
 }
 /* ===== NEWS / VERSION ===== */
-.news-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;align-items:start}
-.news-track{background:linear-gradient(180deg,var(--panel2),var(--bg2));border:1px solid var(--line-soft);
-  border-radius:16px;padding:18px 16px 8px;position:relative;overflow:hidden}
-.news-track::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--tc,var(--gold))}
-.news-track .thd{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:4px}
-.news-track .thd b{font-size:16px;color:var(--tc,var(--gold-soft));letter-spacing:.5px}
-.news-track .thd .tsub{font-size:11.5px;color:var(--muted)}
-.news-track.leak{border-style:dashed}
-.news-item{padding:13px 2px;border-top:1px solid var(--line-soft)}
-.news-item:first-of-type{border-top:0}
-.news-item .meta{display:flex;align-items:center;gap:7px;margin-bottom:5px;flex-wrap:wrap}
-.news-item .ndate{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums;letter-spacing:.3px}
-.news-item .ntag{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:999px;
-  background:var(--tc,var(--gold));color:#0b1020;letter-spacing:.5px}
-.news-track.leak .ntag{background:transparent;color:var(--muted);border:1px solid var(--line-soft)}
-.news-item h4{font-size:14.5px;color:var(--ink);margin:0 0 3px}
-.news-item p{font-size:13px;color:var(--ink-dim);line-height:1.6;margin:0}
+.news-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;align-items:start}
+.news-card{position:relative;background:linear-gradient(180deg,var(--panel),var(--bg2));
+  border:1px solid var(--line-soft);border-radius:16px;padding:15px 17px 14px;overflow:hidden;transition:.2s}
+.news-card::before{content:"";position:absolute;top:0;left:0;bottom:0;width:3px;background:var(--nc,var(--gold))}
+.news-card:hover{transform:translateY(-3px);border-color:var(--line);box-shadow:var(--shadow)}
+.news-card.c-official{--nc:#7fb0ff}
+.news-card.c-version{--nc:#5fd2a1}
+.news-card.c-class{--nc:#f0a95f}
+.nc-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.nc-top .ncat{font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--nc,var(--gold-soft))}
+.nc-top .ndate{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums;letter-spacing:.3px}
+.nc-tags{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:7px}
+.nchip{font-size:10px;font-weight:700;padding:2px 8px;border-radius:999px;border:1px solid transparent;letter-spacing:.3px}
+.nchip.r-tw{background:rgba(127,176,255,.14);color:#a9c8ff;border-color:rgba(127,176,255,.3)}
+.nchip.r-kr{background:rgba(181,146,240,.14);color:#c9b1f5;border-color:rgba(181,146,240,.32)}
+.nchip.v-official{background:rgba(95,210,161,.13);color:#7fe0b6;border-color:rgba(95,210,161,.3)}
+.nchip.v-unconfirmed{background:rgba(240,169,95,.14);color:#f2bd82;border-color:rgba(240,169,95,.34)}
+.nchip.v-community{background:rgba(159,176,208,.12);color:var(--ink-dim);border-color:var(--line-soft)}
+.nc-tags .ntag2{font-size:10px;color:var(--muted);letter-spacing:.3px;margin-left:auto}
+.news-card h4{font-size:14.5px;color:var(--ink);margin:0 0 4px}
+.news-card p{font-size:13px;color:var(--ink-dim);line-height:1.6;margin:0}
+.nc-foot{margin-top:9px}
+.nc-foot .nsrc{font-size:11px;color:var(--gold-soft);text-decoration:none;border-bottom:1px dotted var(--line)}
+.nc-foot .nsrc:hover{color:var(--gold)}
+.news-empty{grid-column:1/-1;color:var(--muted);font-size:13px;padding:18px;text-align:center;
+  border:1px dashed var(--line-soft);border-radius:14px}
 .news-note{color:var(--muted);font-size:12px;line-height:1.7;margin-top:16px;
   border-left:2px solid var(--line);padding-left:12px;max-width:820px}
 /* ===== 官方技能圖示列（modal） ===== */
@@ -699,9 +708,10 @@ footer .warn{font-size:12px;color:#c78; margin-top:8px}
 <section id="news">
   <div class="reveal">
     <div class="eyebrow">업데이트 소식</div>
-    <h2 class="sec-title">版本情報 · 最新動態</h2>
+    <h2 class="sec-title">版本情報 · 情報看板</h2>
     <p class="sec-sub" id="newsIntro"></p>
   </div>
+  <div class="filters reveal" id="newsFilters"><span class="filter-label">분류 分類</span></div>
   <div class="news-grid" id="newsGrid"></div>
   <p class="news-note reveal" id="newsNote"></p>
 </section>
@@ -1023,17 +1033,29 @@ DATA.npcs.forEach(n=>{
   $("#npcList").appendChild(c);
 });
 
-  // news / version roadmap（台服現行 vs 韓服前瞻兩層）
+  // news / 情報看板（分類儀表板：官方公告/版本更新/職業動向 + 地區·可信度標記）
   if(DATA.newsIntro)$("#newsIntro").textContent=DATA.newsIntro;
   if(DATA.newsNote)$("#newsNote").textContent=DATA.newsNote;
-  const newsTone={now:"#5fd2a1",soon:"#7fb0ff",leak:"var(--muted)"};
-  (DATA.news||[]).forEach(tr=>{
-    const items=tr.items.map(it=>
-      `<div class="news-item"><div class="meta"><span class="ndate">${it.date}</span><span class="ntag">${it.tag}</span></div><h4>${it.title}</h4><p>${it.desc}</p></div>`).join("");
-    const track=el("div","news-track reveal "+(tr.tone||""),
-      `<div class="thd"><b>${tr.label}</b><span class="tsub">${tr.sub}</span></div>${items}`);
-    track.style.setProperty("--tc",newsTone[tr.tone]||"var(--gold)");
-    $("#newsGrid").appendChild(track);
+  const catMeta={official:{label:"官方公告",cls:"c-official"},version:{label:"版本更新",cls:"c-version"},"class":{label:"職業動向",cls:"c-class"}};
+  const regionMeta={tw:{label:"台服",cls:"r-tw"},kr:{label:"韓服前瞻",cls:"r-kr"}};
+  const verifyMeta={official:{label:"官方",cls:"v-official"},unconfirmed:{label:"待核實",cls:"v-unconfirmed"},community:{label:"社群整理",cls:"v-community"}};
+  const nf=$("#newsFilters");
+  (DATA.newsFilters||[]).forEach(f=>{
+    const chip=el("div","chip"+(f.id==="all"?" on":""),`${f.label}${f.ko?`<span class="k">${f.ko}</span>`:""}`);
+    chip.dataset.ncat=f.id; chip.onclick=()=>filterNews(chip);
+    nf.appendChild(chip);
+  });
+  (DATA.news||[]).forEach(it=>{
+    const cm=catMeta[it.cat]||{label:it.cat,cls:""};
+    const rm=regionMeta[it.region], vm=verifyMeta[it.verify];
+    const chips=[rm?`<span class="nchip ${rm.cls}">${rm.label}</span>`:"",vm?`<span class="nchip ${vm.cls}">${vm.label}</span>`:""].join("");
+    const link=it.url?`<div class="nc-foot"><a class="nsrc" href="${it.url}" target="_blank" rel="noopener">來源 ↗</a></div>`:"";
+    const card=el("div","news-card reveal "+cm.cls,
+      `<div class="nc-top"><span class="ncat">${cm.label}</span><span class="ndate">${it.date}</span></div>`+
+      `<div class="nc-tags">${chips}<span class="ntag2">${it.tag}</span></div>`+
+      `<h4>${it.title}</h4><p>${it.desc}</p>${link}`);
+    card.dataset.ncat=it.cat;
+    $("#newsGrid").appendChild(card);
   });
 
   // feedback button — shown only if a feedback URL is set in game-data.json (meta.feedbackUrl)
@@ -1112,6 +1134,14 @@ function filterBn(chip){
   curBn=chip.dataset.bn;
   document.querySelectorAll("[data-bn]").forEach(x=>{if(x.classList.contains("chip"))x.classList.remove("on");});
   chip.classList.add("on"); applyFilter();
+}
+function filterNews(chip){
+  const cat=chip.dataset.ncat;
+  document.querySelectorAll("#newsFilters .chip").forEach(x=>x.classList.remove("on"));
+  chip.classList.add("on");
+  document.querySelectorAll("#newsGrid .news-card").forEach(c=>{
+    c.style.display=(cat==="all"||c.dataset.ncat===cat)?"":"none";
+  });
 }
 
 /* ===== Quest checklist (localStorage) ===== */
