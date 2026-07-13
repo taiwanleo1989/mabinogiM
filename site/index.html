@@ -367,7 +367,6 @@ footer .warn{font-size:12px;color:#c78; margin-top:8px}
 .region .tag{display:inline-block;font-size:11px;color:var(--gold-soft);border:1px solid var(--line);
   border-radius:7px;padding:2px 9px;margin-bottom:8px}
 .region h3{color:#fff;font-size:18px}
-.region h3 .en{font-size:12px;color:var(--muted);font-weight:400;margin-left:6px}
 .region .ko{font-size:12px;color:var(--muted);margin-bottom:6px}
 .region p{color:var(--ink-dim);font-size:13.5px}
 .region .rbadge{display:inline-block;font-size:10.5px;font-weight:600;letter-spacing:.3px;border-radius:6px;
@@ -710,10 +709,10 @@ footer .warn{font-size:12px;color:#c78; margin-top:8px}
 
 <footer>
   <div class="fnote">
-    本站為<b style="color:var(--gold-soft)">新手攻略資訊整理</b>，資料蒐集自韓國、英文、台灣等全球社群與官方來源（更新於 2026-07-09）。
+    本站為<b style="color:var(--gold-soft)">新手攻略資訊整理</b>，資料蒐集自韓國、英文、台灣等全球社群與官方來源（更新於 <span id="footDate">2026-07-13</span>）。
     《瑪奇 Mobile / 마비노기 모바일》為 Nexon / devCAT Studio 所有。
   </div>
-  <div class="warn"><svg class="isvg mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2l9.3 16.1a1 1 0 0 1-.9 1.5H3.6a1 1 0 0 1-.9-1.5z"/><path d="M12 9.5v5" stroke-width="2.2"/><circle cx="12" cy="17.3" r="1.1" fill="currentColor" stroke="none"/></svg> 遊戲仍在改版，數值與內容會隨賽季調整；台港版本尚未官方在地化，內容以韓國版為準，會定期回補。</div>
+  <div class="warn"><svg class="isvg mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2l9.3 16.1a1 1 0 0 1-.9 1.5H3.6a1 1 0 0 1-.9-1.5z"/><path d="M12 9.5v5" stroke-width="2.2"/><circle cx="12" cy="17.3" r="1.1" fill="currentColor" stroke="none"/></svg> 遊戲仍在改版，數值與內容會隨賽季調整；台港澳 7/22 開服，部分地名與版本細節以開服當下官方為準，本站持續校正回補。</div>
 </footer>
 
 <!-- FEEDBACK -->
@@ -1039,6 +1038,8 @@ DATA.npcs.forEach(n=>{
 
   // feedback button — shown only if a feedback URL is set in game-data.json (meta.feedbackUrl)
   if(DATA.meta && DATA.meta.feedbackUrl){const fb=$("#feedbackBtn");fb.href=DATA.meta.feedbackUrl;fb.style.display="inline-flex";}
+  // footer 更新日期：以 meta.dataVersion 為單一來源，避免多處日期不一致
+  const fd=$("#footDate"); if(fd && DATA.meta && DATA.meta.dataVersion) fd.textContent=DATA.meta.dataVersion;
 
   // quests + scroll-reveal (robust; some webviews don't fire IntersectionObserver)
   renderQuests();
