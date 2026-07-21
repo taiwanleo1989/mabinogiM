@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>瑪奇 Mobile 新手冒險指南 · 艾琳世界攻略</title>
+<title>瑪奇 Mobile 新手冒險指南 · 愛爾琳世界攻略</title>
 <meta name="description" content="瑪奇 Mobile（마비노기 모바일）新手友善攻略：18 職業圖鑑、新手黃金路線、生活玩法、貨幣系統，全球資料整理。">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0b1020">
@@ -251,6 +251,15 @@ section{padding:70px 0;scroll-margin-top:80px}
 .cd .cd-lead{font-family:"Microsoft JhengHei","PingFang TC",system-ui,sans-serif;font-size:.38em;font-weight:700;
   color:var(--gold);letter-spacing:2px;margin:0 .14em;vertical-align:.2em;text-shadow:none}
 .cd.live{color:#5fd2a1;text-shadow:0 0 24px rgba(95,210,161,.32)}
+/* 時分秒倒數：分段單位 */
+.cd-units{display:flex;justify-content:center;align-items:flex-start;gap:clamp(8px,2.6vw,20px)}
+.cd-u{display:flex;flex-direction:column;align-items:center;line-height:1;min-width:clamp(48px,9vw,86px)}
+.cd-u b{font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:1px}
+.cd-u i{font-style:normal;font-family:"Microsoft JhengHei","PingFang TC",system-ui,sans-serif;
+  font-size:11.5px;font-weight:600;letter-spacing:3px;color:var(--muted);margin-top:11px;text-shadow:none}
+.cd-sep{font-size:.55em;font-weight:700;color:rgba(212,175,84,.35);align-self:flex-start;
+  margin:.16em -.1em 0;text-shadow:none}
+@media(max-width:420px){.cd-units{gap:6px}.cd-u i{letter-spacing:1.5px}}
 .pl-steps{grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:24px}
 .pl-step .pl-cta{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;
   color:var(--gold-soft);border:1px solid var(--line);border-radius:9px;padding:7px 14px;margin-top:14px;transition:.15s}
@@ -576,7 +585,7 @@ footer .warn{font-size:12px;color:#c78; margin-top:8px}
 <div class="hero">
   <div class="runeframe reveal">
     <span class="badge-live"><span class="dot"></span> 韓國已上線 2025.03.27 · 台灣 2026.07.22 正式啟動</span>
-    <h1>踏入 <span class="hl">艾琳</span> 的世界</h1>
+    <h1>踏入 <span class="hl">愛爾琳</span> 的世界</h1>
     <p class="hero-tagline">你的第一趟冒險，從這裡開始</p>
     <p class="lead">《瑪奇 Mobile》是一款高自由度的開放世界生活 MMORPG。換一把武器就換一種職業，也可以只當釣魚、料理、演奏的生活玩家。這份指南把全球（尤其韓國）的一手資料整理成新手也能秒懂的攻略。</p>
     <p class="kicker">마비노기 모바일 · devCAT / Nexon</p>
@@ -612,7 +621,7 @@ footer .warn{font-size:12px;color:#c78; margin-top:8px}
   <div class="reveal">
     <div class="eyebrow">게임 소개</div>
     <h2 class="sec-title">這是一款什麼樣的遊戲？</h2>
-    <p class="sec-sub">一句話：<b style="color:var(--gold-soft)">在同一片艾琳世界，用你喜歡的方式生活</b>——想戰鬥就戰鬥，想釣魚就釣魚。它延續 PC 版《瑪奇》的女神敘事，是同 IP 的全新作品，不是舊版移植。</p>
+    <p class="sec-sub">一句話：<b style="color:var(--gold-soft)">在同一片愛爾琳世界，用你喜歡的方式生活</b>——想戰鬥就戰鬥，想釣魚就釣魚。它延續 PC 版《瑪奇》的女神敘事，是同 IP 的全新作品，不是舊版移植。</p>
   </div>
   <div class="grid features" id="features"></div>
 </section>
@@ -749,7 +758,7 @@ footer .warn{font-size:12px;color:#c78; margin-top:8px}
 <section id="regions">
   <div class="reveal">
     <div class="eyebrow">월드 · NPC</div>
-    <h2 class="sec-title">艾琳地圖與重要 NPC</h2>
+    <h2 class="sec-title">愛爾琳地圖與重要 NPC</h2>
     <p class="sec-sub" id="regionIntro"></p>
   </div>
   <div class="grid region-grid reveal" id="regionGrid"></div>
@@ -966,13 +975,31 @@ if(PL){
   $("#plKicker").textContent=PL.kicker;
   $("#plTitle").textContent=PL.title;
   $("#plIntro").textContent=PL.intro;
-  const today=new Date();today.setHours(0,0,0,0);
-  const launch=new Date(PL.launch+"T00:00:00");
-  const days=Math.round((launch-today)/86400000);
   const cd=$("#countdown"),dot=PL.launch.replace(/-/g,".");
-  if(days>0){cd.innerHTML=`<span class="cd-lead">倒數</span>${days}<span class="cd-lead">天</span><span class="cd-sub">距 ${dot} 正式開服</span>`;}
-  else if(days===0){cd.className="cd live";cd.innerHTML=`今天開服<span class="cd-sub">台港澳 ${dot} 上線</span>`;}
-  else{cd.className="cd live";cd.innerHTML=`已開服<span class="cd-sub">台港澳於 ${dot} 上線</span>`;}
+  const target=new Date(PL.launchAt||(PL.launch+"T00:00:00+08:00"));
+  const pad=n=>String(n).padStart(2,"0");
+  let cdTimer=null;
+  function renderCountdown(){
+    const diff=target-Date.now();
+    if(diff<=0){
+      if(cdTimer){clearInterval(cdTimer);cdTimer=null;}
+      cd.className="cd live";
+      cd.innerHTML=(diff>-86400000)
+        ? `今天開服<span class="cd-sub">台港澳 ${dot} 00:00 上線</span>`
+        : `已開服<span class="cd-sub">台港澳於 ${dot} 00:00 上線</span>`;
+      return;
+    }
+    const d=Math.floor(diff/86400000),h=Math.floor(diff/3600000)%24,
+          m=Math.floor(diff/60000)%60,s=Math.floor(diff/1000)%60;
+    const u=(v,label)=>`<span class="cd-u"><b>${v}</b><i>${label}</i></span>`;
+    const sep=`<span class="cd-sep">:</span>`;
+    cd.className="cd";
+    cd.innerHTML=`<div class="cd-units">`
+      +(d>0?u(d,"天"):"")+u(pad(h),"時")+sep+u(pad(m),"分")+sep+u(pad(s),"秒")
+      +`</div><span class="cd-sub">距 ${dot} 00:00 正式開服（台灣時間）</span>`;
+  }
+  renderCountdown();
+  if(target-Date.now()>0)cdTimer=setInterval(renderCountdown,1000);
   PL.steps.forEach((s,i)=>{
     $("#prelaunchSteps").appendChild(el("div","step pl-step",
       `<div class="n">${i+1}</div><h4>${s.title}</h4><div class="ko">${s.ko}</div><p>${s.desc}</p><a class="pl-cta" href="${s.href}">${s.cta} →</a>`));
