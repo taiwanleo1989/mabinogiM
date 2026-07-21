@@ -706,6 +706,38 @@ table.g-lv tr.cf-conflict td:nth-child(2){color:#e77878}
   .g-two,.g-routine,.g-ship{grid-template-columns:1fr}
 }
 
+/* ===== 贊助 SPONSOR ===== */
+.sp-wrap{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
+.sp-why{display:grid;gap:11px}
+.sp-item{display:flex;gap:13px;align-items:flex-start;background:rgba(159,176,208,.05);
+  border:1px solid var(--line-soft);border-radius:13px;padding:14px 16px}
+.sp-item .si-ic{flex-shrink:0;width:32px;height:32px;border-radius:9px;display:grid;place-items:center;
+  background:rgba(231,198,106,.1);color:var(--gold-soft)}
+.sp-item .si-ic svg{width:17px;height:17px}
+.sp-item b{color:#fff;font-size:14px;display:block;margin-bottom:2px}
+.sp-item p{color:var(--ink-dim);font-size:12.5px;line-height:1.65}
+.sp-panel{background:linear-gradient(180deg,rgba(212,175,84,.1),rgba(212,175,84,.02));
+  border:1px solid var(--line);border-radius:var(--r);padding:24px}
+.sp-panel .sp-h{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.sp-panel .sp-h svg{width:22px;height:22px;color:var(--gold-soft);flex-shrink:0}
+.sp-panel .sp-h b{color:#fff;font-size:17px}
+.sp-promise{color:var(--ink-dim);font-size:13px;line-height:1.75;margin-bottom:18px}
+.sp-promise b{color:var(--gold-soft)}
+.sp-methods{display:grid;gap:10px}
+.sp-method{display:flex;align-items:center;gap:13px;padding:14px 16px;border-radius:12px;
+  border:1px solid var(--line-soft);background:rgba(11,16,32,.4);transition:.18s}
+.sp-method:hover{transform:translateY(-2px);border-color:var(--sc,var(--gold-soft));
+  background:rgba(11,16,32,.66);box-shadow:0 10px 26px rgba(0,0,0,.3)}
+.sp-method.a{--sc:#5fd2a1}.sp-method.b{--sc:#7fb0ff}.sp-method.c{--sc:#f0a95f}
+.sp-method .sm-dot{flex-shrink:0;width:9px;height:9px;border-radius:50%;background:var(--sc,var(--gold))}
+.sp-method .sm-tx{flex:1;min-width:0}
+.sp-method .sm-tx b{color:#fff;font-size:14.5px;display:block}
+.sp-method .sm-tx span{color:var(--muted);font-size:12px}
+.sp-method .sm-go{color:var(--gold-soft);font-size:13px;font-weight:700;white-space:nowrap}
+.sp-note{color:var(--muted);font-size:11.5px;line-height:1.7;margin-top:16px;
+  border-top:1px solid var(--line-soft);padding-top:13px}
+@media(max-width:860px){.sp-wrap{grid-template-columns:1fr}}
+
 /* ===== 留言板 BOARD ===== */
 .bd-wrap{display:grid;grid-template-columns:1.35fr 1fr;gap:24px;align-items:start}
 .bd-form{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line-soft);
@@ -823,6 +855,7 @@ table.g-lv tr.cf-conflict td:nth-child(2){color:#e77878}
       <a href="#systems">系統機制</a>
       <a href="#news">版本情報</a>
       <a href="#board" id="navBoard" style="display:none">留言板</a>
+      <a href="#sponsor" id="navSponsor" style="display:none">贊助</a>
     </nav>
   </div>
 </header>
@@ -1125,6 +1158,28 @@ table.g-lv tr.cf-conflict td:nth-child(2){color:#e77878}
   <div class="filters reveal" id="newsFilters"><span class="filter-label">분류 分類</span></div>
   <div class="news-grid" id="newsGrid"></div>
   <p class="news-note reveal" id="newsNote"></p>
+</section>
+
+<!-- SPONSOR 贊助 -->
+<div class="divider" id="sponsorDivider" style="display:none"></div>
+<section id="sponsor" style="display:none">
+  <div class="reveal">
+    <div class="eyebrow" id="spEyebrow"></div>
+    <h2 class="sec-title" id="spTitle"></h2>
+    <p class="sec-sub" id="spIntro"></p>
+  </div>
+  <div class="sp-wrap reveal">
+    <div class="sp-why" id="spWhy"></div>
+    <div class="sp-panel">
+      <div class="sp-h">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h13v5.5a4.5 4.5 0 0 1-4.5 4.5h-4A4.5 4.5 0 0 1 3 13.5z"/><path d="M16 9.5h2.2a2.5 2.5 0 0 1 0 5H16"/><path d="M6.5 3.2v2.2M10 2.8v2.6M13.5 3.2v2.2" stroke-width="1.6"/></svg>
+        <b>選一個順手的方式</b>
+      </div>
+      <p class="sp-promise" id="spPromise"></p>
+      <div class="sp-methods" id="spMethods"></div>
+      <p class="sp-note" id="spNote"></p>
+    </div>
+  </div>
 </section>
 
 <!-- BOARD 留言板 -->
@@ -1666,6 +1721,29 @@ DATA.npcs.forEach(n=>{
     card.dataset.ncat=it.cat;
     $("#newsGrid").appendChild(card);
   });
+
+  // 贊助 — 只有至少一個平台填了網址才顯示整區（避免站上出現按不了的按鈕）
+  if(DATA.sponsor && DATA.sponsor.enabled){
+    const S=DATA.sponsor;
+    const live=(S.methods||[]).filter(m=>m.url&&m.url.trim());
+    if(live.length){
+      $("#sponsor").style.display=""; $("#sponsorDivider").style.display=""; $("#navSponsor").style.display="";
+      $("#spEyebrow").textContent=S.eyebrow||"";
+      $("#spTitle").textContent=S.title||"";
+      $("#spIntro").textContent=S.intro||"";
+      $("#spNote").textContent=S.note||"";
+      // promise 允許用 **粗體** 標出承諾重點
+      $("#spPromise").innerHTML=(S.promise||"").replace(/\*\*(.+?)\*\*/g,"<b>$1</b>");
+      $("#spWhy").innerHTML=(S.why||[]).map(w=>
+        `<div class="sp-item"><div class="si-ic">${iconSvg(w.icon)}</div><div><b>${w.t}</b><p>${w.d}</p></div></div>`).join("");
+      $("#spMethods").innerHTML=live.map(m=>
+        `<a class="sp-method ${m.tone||""}" href="${m.url}" target="_blank" rel="noopener noreferrer">
+           <span class="sm-dot"></span>
+           <span class="sm-tx"><b>${m.label}</b><span>${m.desc||""}</span></span>
+           <span class="sm-go">前往 ↗</span>
+         </a>`).join("");
+    }
+  }
 
   // 留言板 — 只有 board.enabled 且設了 endpoint 才顯示
   if(DATA.board && DATA.board.enabled && DATA.board.endpoint){
