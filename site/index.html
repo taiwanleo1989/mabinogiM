@@ -705,6 +705,78 @@ table.g-lv tr.cf-conflict td:nth-child(2){color:#e77878}
   .g-two,.g-routine,.g-ship{grid-template-columns:1fr}
 }
 
+/* ===== 留言板 BOARD ===== */
+.bd-wrap{display:grid;grid-template-columns:1.35fr 1fr;gap:24px;align-items:start}
+.bd-form{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line-soft);
+  border-radius:var(--r);padding:24px}
+.bd-row{margin-bottom:16px}
+.bd-row:last-of-type{margin-bottom:0}
+.bd-row label{display:block;font-size:13px;font-weight:700;color:var(--gold-soft);margin-bottom:7px;letter-spacing:.5px}
+.bd-row label .opt{color:var(--muted);font-weight:400;font-size:11.5px;margin-left:6px;letter-spacing:0}
+.bd-row input[type=text],.bd-row input[type=email],.bd-row textarea,.bd-row select{
+  width:100%;font-family:inherit;font-size:14px;color:var(--ink);background:rgba(11,16,32,.6);
+  border:1px solid var(--line-soft);border-radius:11px;padding:11px 14px;transition:.15s;line-height:1.6}
+.bd-row textarea{min-height:132px;resize:vertical}
+.bd-row select{appearance:none;cursor:pointer;
+  background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e7c66a' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center;background-size:15px;padding-right:38px}
+.bd-row select option{background:var(--bg2);color:var(--ink)}
+.bd-row input:focus,.bd-row textarea:focus,.bd-row select:focus{outline:none;border-color:var(--gold-soft);
+  background:rgba(11,16,32,.85);box-shadow:0 0 0 3px rgba(231,198,106,.13)}
+.bd-row input::placeholder,.bd-row textarea::placeholder{color:#54658a}
+.bd-kinds{display:flex;flex-wrap:wrap;gap:8px}
+.bd-kind{cursor:pointer;position:relative}
+.bd-kind input{position:absolute;opacity:0;width:0;height:0}
+.bd-kind span{display:block;font-size:13px;font-weight:600;color:var(--ink-dim);border:1px solid var(--line-soft);
+  border-radius:10px;padding:8px 14px;transition:.15s;background:rgba(159,176,208,.04)}
+.bd-kind:hover span{border-color:var(--line);color:var(--ink)}
+.bd-kind input:checked+span{color:#2a1f05;border-color:transparent;font-weight:700;
+  background:linear-gradient(180deg,var(--gold-soft),var(--gold-deep))}
+.bd-kind input:focus-visible+span{box-shadow:0 0 0 3px rgba(231,198,106,.35)}
+.bd-kind-hint{font-size:12px;color:var(--muted);margin-top:8px;min-height:18px;line-height:1.5}
+.bd-count{text-align:right;font-size:11.5px;color:var(--muted);margin-top:6px;font-variant-numeric:tabular-nums}
+.bd-count.over{color:#e77878;font-weight:700}
+.bd-err{display:none;font-size:12.5px;color:#ffb0b0;background:rgba(231,120,120,.12);
+  border:1px solid rgba(231,120,120,.35);border-radius:10px;padding:9px 13px;margin-top:10px;line-height:1.6}
+.bd-err.on{display:block}
+.bd-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:20px;
+  padding-top:18px;border-top:1px solid var(--line-soft)}
+.bd-submit{font-family:inherit;font-size:14.5px;font-weight:700;color:#2a1f05;cursor:pointer;border:none;
+  border-radius:11px;padding:12px 26px;letter-spacing:.5px;transition:.18s;
+  background:linear-gradient(180deg,var(--gold-soft),var(--gold-deep));box-shadow:0 8px 24px rgba(231,198,106,.24)}
+.bd-submit:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 14px 34px rgba(231,198,106,.36)}
+.bd-submit:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+.bd-hint{font-size:12px;color:var(--muted);flex:1;min-width:180px;line-height:1.5}
+.bd-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+/* 結果狀態 */
+.bd-result{display:none;text-align:center;padding:34px 24px}
+.bd-result.on{display:block}
+.bd-result .rs-ic{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;margin:0 auto 14px}
+.bd-result .rs-ic svg{width:27px;height:27px}
+.bd-result.ok .rs-ic{background:rgba(95,210,161,.14);color:#5fd2a1}
+.bd-result.bad .rs-ic{background:rgba(231,120,120,.14);color:#e77878}
+.bd-result h4{color:#fff;font-size:19px;margin-bottom:7px}
+.bd-result p{color:var(--ink-dim);font-size:13.5px;max-width:400px;margin:0 auto;line-height:1.75}
+.bd-again{margin-top:18px;font-family:inherit;font-size:13px;font-weight:600;color:var(--gold-soft);cursor:pointer;
+  background:none;border:1px solid var(--line);border-radius:10px;padding:9px 20px;transition:.15s}
+.bd-again:hover{background:rgba(231,198,106,.1)}
+/* 側欄 */
+.bd-side .bd-card{background:rgba(159,176,208,.05);border:1px solid var(--line-soft);
+  border-radius:14px;padding:18px 20px;margin-bottom:14px}
+.bd-side .bd-card:last-child{margin-bottom:0}
+.bd-side h4{color:var(--gold-soft);font-size:14.5px;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.bd-side h4 svg{width:16px;height:16px;flex-shrink:0}
+.bd-side p{color:var(--ink-dim);font-size:12.5px;line-height:1.75}
+.bd-side ul{list-style:none;margin-top:4px}
+.bd-side li{color:var(--ink-dim);font-size:12.5px;line-height:1.6;padding:3px 0 3px 15px;position:relative}
+.bd-side li::before{content:"";position:absolute;left:2px;top:11px;width:4px;height:4px;border-radius:50%;background:var(--gold-deep)}
+.bd-privacy{border-color:rgba(240,169,95,.28)!important;background:rgba(240,169,95,.07)!important}
+.bd-privacy h4{color:#f0a95f}
+@media(max-width:860px){.bd-wrap{grid-template-columns:1fr}}
+@media(max-width:520px){.bd-form{padding:18px}.bd-actions{flex-direction:column;align-items:stretch}.bd-submit{width:100%}
+  /* 16px 以下 iOS Safari 會在聚焦輸入框時自動放大頁面，故行動版拉到 16px */
+  .bd-row input[type=text],.bd-row input[type=email],.bd-row textarea,.bd-row select{font-size:16px}}
+
 /* ===== 官方技能圖示列（modal） ===== */
 .offskills{margin-top:16px}
 .offskill-row{display:flex;gap:9px;flex-wrap:wrap;margin-top:10px}
@@ -749,6 +821,7 @@ table.g-lv tr.cf-conflict td:nth-child(2){color:#e77878}
       <a href="#regions">地圖NPC</a>
       <a href="#systems">系統機制</a>
       <a href="#news">版本情報</a>
+      <a href="#board" id="navBoard" style="display:none">留言板</a>
     </nav>
   </div>
 </header>
@@ -1051,6 +1124,73 @@ table.g-lv tr.cf-conflict td:nth-child(2){color:#e77878}
   <div class="filters reveal" id="newsFilters"><span class="filter-label">분류 分類</span></div>
   <div class="news-grid" id="newsGrid"></div>
   <p class="news-note reveal" id="newsNote"></p>
+</section>
+
+<!-- BOARD 留言板 -->
+<div class="divider" id="boardDivider" style="display:none"></div>
+<section id="board" style="display:none">
+  <div class="reveal">
+    <div class="eyebrow" id="bdEyebrow"></div>
+    <h2 class="sec-title" id="bdTitle"></h2>
+    <p class="sec-sub" id="bdIntro"></p>
+  </div>
+  <div class="bd-wrap reveal">
+    <div class="bd-form">
+      <form id="bdForm" novalidate>
+        <div class="bd-row">
+          <label id="bdKindLabel"></label>
+          <div class="bd-kinds" id="bdKinds"></div>
+          <div class="bd-kind-hint" id="bdKindHint"></div>
+        </div>
+        <div class="bd-row">
+          <label for="bdArea" id="bdAreaLabel"></label>
+          <select id="bdArea" name="相關區塊"></select>
+        </div>
+        <div class="bd-row">
+          <label for="bdMsg" id="bdMsgLabel"></label>
+          <textarea id="bdMsg" name="訊息內容" required></textarea>
+          <div class="bd-count" id="bdCount"></div>
+        </div>
+        <div class="bd-row">
+          <label for="bdName" id="bdNameLabel"></label>
+          <input type="text" id="bdName" name="暱稱" maxlength="40" autocomplete="nickname">
+        </div>
+        <div class="bd-row">
+          <label for="bdMail" id="bdMailLabel"></label>
+          <input type="email" id="bdMail" name="聯絡信箱" maxlength="120" autocomplete="email">
+        </div>
+        <div class="bd-hp" aria-hidden="true">
+          <label>請留空<input type="text" id="bdHoney" name="_honey" tabindex="-1" autocomplete="off"></label>
+        </div>
+        <div class="bd-err" id="bdErr" role="alert"></div>
+        <div class="bd-actions">
+          <button type="submit" class="bd-submit" id="bdSubmit"></button>
+          <span class="bd-hint" id="bdHint"></span>
+        </div>
+      </form>
+      <div class="bd-result" id="bdResult">
+        <div class="rs-ic" id="bdResultIc"></div>
+        <h4 id="bdResultTitle"></h4>
+        <p id="bdResultDesc"></p>
+        <button type="button" class="bd-again" id="bdAgain">再寫一則</button>
+      </div>
+    </div>
+    <aside class="bd-side">
+      <div class="bd-card bd-privacy">
+        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10.5" width="16" height="10" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg> 你的資料怎麼被處理</h4>
+        <p id="bdNote"></p>
+      </div>
+      <div class="bd-card">
+        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4.5M12 8.2v.2" stroke-width="2.3"/></svg> 什麼樣的訊息最有用</h4>
+        <ul>
+          <li>寫「哪一頁的哪一句」跟遊戲實際差在哪</li>
+          <li>附上你看到的實際數字，勝過任何形容詞</li>
+          <li>台服開服後的實測，優先於韓服舊資料</li>
+          <li>覺得哪裡看不懂，也值得說——那是我寫得不好</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
 </section>
 </main>
 
@@ -1526,6 +1666,98 @@ DATA.npcs.forEach(n=>{
     $("#newsGrid").appendChild(card);
   });
 
+  // 留言板 — 只有 board.enabled 且設了 endpoint 才顯示
+  if(DATA.board && DATA.board.enabled && DATA.board.endpoint){
+    const B=DATA.board, F=B.fields||{};
+    $("#board").style.display=""; $("#boardDivider").style.display=""; $("#navBoard").style.display="";
+    $("#bdEyebrow").textContent=B.eyebrow||"";
+    $("#bdTitle").textContent=B.title||"";
+    $("#bdIntro").textContent=B.intro||"";
+    $("#bdNote").textContent=B.note||"";
+    $("#bdKindLabel").textContent=F.kindLabel||"";
+    $("#bdAreaLabel").textContent=F.areaLabel||"";
+    $("#bdMsgLabel").textContent=F.msgLabel||"";
+    $("#bdSubmit").textContent=F.submit||"送出";
+    $("#bdMsg").placeholder=F.msgPlaceholder||"";
+    $("#bdName").placeholder=F.namePlaceholder||"";
+    $("#bdMail").placeholder=F.mailPlaceholder||"";
+    $("#bdNameLabel").innerHTML=(F.nameLabel||"")+'<span class="opt">選填</span>';
+    $("#bdMailLabel").innerHTML=(F.mailLabel||"")+'<span class="opt">選填</span>';
+
+    // 訊息類型（單選鈕，第一個預設選中）
+    const kinds=F.kinds||[];
+    $("#bdKinds").innerHTML=kinds.map((k,i)=>
+      `<label class="bd-kind"><input type="radio" name="訊息類型" value="${k.v}"${i===0?" checked":""} data-hint="${k.d||""}"><span>${k.v}</span></label>`).join("");
+    const setHint=()=>{const c=document.querySelector('#bdKinds input:checked');$("#bdKindHint").textContent=c?c.dataset.hint:"";};
+    $("#bdKinds").addEventListener("change",setHint); setHint();
+
+    // 相關區塊
+    $("#bdArea").innerHTML=(F.areas||[]).map(a=>`<option value="${a}">${a}</option>`).join("");
+
+    // 字數計數
+    const min=F.msgMin||10, max=F.msgMax||1000, msg=$("#bdMsg"), cnt=$("#bdCount");
+    msg.maxLength=max;
+    const updCount=()=>{const n=msg.value.trim().length;
+      cnt.textContent=`${n} / ${max}`+(n<min?`（至少 ${min} 字）`:"");
+      cnt.classList.toggle("over",n>0&&n<min);};
+    msg.addEventListener("input",updCount); updCount();
+    $("#bdHint").textContent=`內容至少 ${min} 個字，最多 ${max} 個字。`;
+
+    const errBox=$("#bdErr"), btn=$("#bdSubmit"), form=$("#bdForm"), result=$("#bdResult");
+    const showErr=t=>{errBox.textContent=t;errBox.classList.add("on");};
+    const clearErr=()=>errBox.classList.remove("on");
+    const ICON_OK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6.5L9.5 17.5 4 12"/></svg>';
+    const ICON_BAD='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2l9.3 16.1a1 1 0 0 1-.9 1.5H3.6a1 1 0 0 1-.9-1.5z"/><path d="M12 9.5v5"/><circle cx="12" cy="17.3" r="1.1" fill="currentColor" stroke="none"/></svg>';
+    const showResult=(ok,title,desc)=>{
+      form.style.display="none";
+      result.className="bd-result on "+(ok?"ok":"bad");
+      $("#bdResultIc").innerHTML=ok?ICON_OK:ICON_BAD;
+      $("#bdResultTitle").textContent=title;
+      $("#bdResultDesc").textContent=desc;
+    };
+    $("#bdAgain").addEventListener("click",()=>{
+      result.className="bd-result"; form.style.display="";
+      msg.value=""; updCount(); clearErr(); msg.focus();
+    });
+
+    form.addEventListener("submit",async e=>{
+      e.preventDefault(); clearErr();
+      if($("#bdHoney").value){showResult(true,(B.ok||{}).title||"收到了",(B.ok||{}).desc||"");return;} // 蜜罐：機器人填了就假成功、不送出
+      const text=msg.value.trim();
+      if(text.length<min){showErr(`訊息內容還太短，請至少寫 ${min} 個字，這樣我才知道你指的是什麼。`);msg.focus();return;}
+      if(text.length>max){showErr(`訊息內容超過 ${max} 個字，請精簡一下。`);msg.focus();return;}
+      const mail=$("#bdMail").value.trim();
+      if(mail&&!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail)){showErr("信箱格式看起來不對。不想留信箱的話，直接清空也可以送出。");$("#bdMail").focus();return;}
+
+      btn.disabled=true; btn.textContent=F.sending||"傳送中…";
+      const kind=(document.querySelector('#bdKinds input:checked')||{}).value||"";
+      const payload={
+        _subject:`${B.subject||"網站反饋"}｜${kind}`,
+        _template:"table",
+        _captcha:"false",
+        "訊息類型":kind,
+        "相關區塊":$("#bdArea").value,
+        "訊息內容":text,
+        "暱稱":$("#bdName").value.trim()||"（未填）",
+        "聯絡信箱":mail||"（未填）",
+        "送出時間":new Date().toLocaleString("zh-TW",{hour12:false}),
+        "來源頁面":location.href.split("#")[0]
+      };
+      if(mail)payload._replyto=mail;
+      try{
+        const res=await fetch(B.endpoint,{method:"POST",
+          headers:{"Content-Type":"application/json",Accept:"application/json"},
+          body:JSON.stringify(payload)});
+        let ok=res.ok;
+        try{const j=await res.json(); if(j&&typeof j.success!=="undefined") ok=(j.success===true||j.success==="true");}catch(_){}
+        if(ok){showResult(true,(B.ok||{}).title||"收到了",(B.ok||{}).desc||"");}
+        else{throw new Error("HTTP "+res.status);}
+      }catch(ex){
+        btn.disabled=false; btn.textContent=F.submit||"送出";
+        showErr(((B.err||{}).desc||"送出失敗，請稍後再試。")+"（"+ex.message+"）");
+      }
+    });
+  }
   // feedback button — shown only if a feedback URL is set in game-data.json (meta.feedbackUrl)
   if(DATA.meta && DATA.meta.feedbackUrl){const fb=$("#feedbackBtn");fb.href=DATA.meta.feedbackUrl;fb.style.display="inline-flex";}
   // footer 更新日期：以 meta.dataVersion 為單一來源，避免多處日期不一致
