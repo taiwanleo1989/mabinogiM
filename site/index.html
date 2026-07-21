@@ -706,6 +706,67 @@ table.g-lv tr.cf-conflict td:nth-child(2){color:#e77878}
   .g-two,.g-routine,.g-ship{grid-template-columns:1fr}
 }
 
+/* ===== 符文配置 RUNE BUILDS ===== */
+.rb-disc{font-size:12.5px;line-height:1.8;color:#ffd9a8;background:rgba(240,169,95,.09);
+  border:1px solid rgba(240,169,95,.3);border-left:3px solid #f0a95f;border-radius:11px;
+  padding:13px 16px;margin-bottom:28px}
+/* 通用三件套 */
+.rb-uni{background:linear-gradient(180deg,rgba(212,175,84,.11),rgba(212,175,84,.02));
+  border:1px solid var(--line);border-radius:var(--r);padding:22px;margin-bottom:14px}
+.rb-uni h3{color:#fff;font-size:18px;margin-bottom:16px;display:flex;align-items:center;gap:9px}
+.rb-uni h3::before{content:"";width:4px;height:18px;border-radius:2px;
+  background:linear-gradient(180deg,var(--gold-soft),var(--gold-deep))}
+.rb-tri{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.rb-slot{background:rgba(11,16,32,.45);border:1px solid var(--line-soft);border-radius:13px;padding:15px 17px}
+.rb-slot .rs-lb{font-size:10.5px;font-weight:700;letter-spacing:2px;color:var(--gold);text-transform:uppercase}
+.rb-slot .rs-pick{color:#fff;font-size:17px;font-weight:700;margin:5px 0 2px;line-height:1.35}
+.rb-slot .rs-ko{color:var(--muted);font-size:11px}
+.rb-slot .rs-eff{color:var(--ink-dim);font-size:12.5px;line-height:1.6;margin-top:8px;
+  border-top:1px solid var(--line-soft);padding-top:8px}
+.rb-slot .rs-stat{display:inline-block;font-size:10.5px;font-weight:700;color:#5fd2a1;
+  border:1px solid rgba(95,210,161,.4);border-radius:20px;padding:2px 9px;margin-top:9px}
+.rb-uni-note{color:var(--ink-dim);font-size:12.5px;line-height:1.75;margin-top:14px;
+  border-top:1px dashed var(--line);padding-top:12px}
+/* 職業配置卡 */
+.rb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px;margin-top:6px}
+.rb-card{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line-soft);
+  border-radius:15px;padding:17px 19px;border-top:3px solid var(--rc,var(--gold));transition:.2s}
+.rb-card:hover{transform:translateY(-3px);border-color:var(--line);box-shadow:var(--shadow)}
+.rb-card.f-warrior{--rc:var(--warrior)}.rb-card.f-archer{--rc:var(--archer)}
+.rb-card.f-mage{--rc:var(--mage)}.rb-card.f-healer{--rc:var(--healer)}
+.rb-card.f-bard{--rc:var(--bard)}.rb-card.f-rogue{--rc:var(--rogue)}
+.rb-card .rc-top{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.rb-card .rc-name{color:#fff;font-size:17px;font-weight:700}
+.rb-card .rc-ko{color:var(--muted);font-size:11px}
+.rb-card .rc-role{font-size:10.5px;font-weight:700;color:var(--rc,var(--gold));
+  border:1px solid currentColor;border-radius:20px;padding:1px 8px;margin-left:auto;white-space:nowrap}
+.rb-card .rc-alias{font-size:10.5px;color:var(--muted);border:1px solid var(--line-soft);
+  border-radius:5px;padding:1px 6px}
+.rb-row{display:flex;gap:10px;padding:7px 0;border-top:1px solid var(--line-soft);font-size:13px;line-height:1.6}
+.rb-row:first-of-type{border-top:none}
+.rb-row .rr-k{flex-shrink:0;width:40px;color:var(--gold-soft);font-size:11.5px;font-weight:700;padding-top:1px}
+.rb-row .rr-v{color:var(--ink-dim);flex:1;min-width:0}
+.rb-row .rr-v b{color:#fff;font-weight:700}
+.rb-row ul{list-style:none}
+.rb-row li{padding:1px 0 1px 13px;position:relative}
+.rb-row li::before{content:"";position:absolute;left:2px;top:10px;width:3.5px;height:3.5px;
+  border-radius:50%;background:var(--gold-deep)}
+/* 符文效果表 */
+.rb-gloss{margin-top:34px}
+.rb-gcols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:9px}
+.rb-g{display:flex;gap:11px;align-items:flex-start;background:rgba(159,176,208,.05);
+  border:1px solid var(--line-soft);border-radius:11px;padding:10px 13px}
+.rb-g .gg-tag{flex-shrink:0;font-size:9.5px;font-weight:700;letter-spacing:.5px;border-radius:5px;
+  padding:2px 6px;margin-top:2px;color:#2a1f05;background:var(--gt,var(--gold-deep));white-space:nowrap}
+.rb-g.g-emblem{--gt:#b05bc0}.rb-g.g-weapon{--gt:#c94b4b}
+.rb-g.g-set{--gt:#5fd2a1}.rb-g.g-armor{--gt:#5b6fd6}
+.rb-g b{color:#fff;font-size:13.5px}
+.rb-g .gg-ko{color:var(--muted);font-size:10.5px;margin-left:5px}
+.rb-g p{color:var(--ink-dim);font-size:12px;line-height:1.55;margin-top:2px}
+.rb-src{color:var(--muted);font-size:11.5px;line-height:1.75;margin-top:18px;
+  border-top:1px solid var(--line-soft);padding-top:13px}
+@media(max-width:520px){.rb-card .rc-role{margin-left:0}}
+
 /* ===== 贊助 SPONSOR ===== */
 .sp-wrap{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
 .sp-why{display:grid;gap:11px}
@@ -855,6 +916,7 @@ table.g-lv tr.cf-conflict td:nth-child(2){color:#e77878}
       <a href="#guild">公會</a>
       <a href="#life">生活玩法</a>
       <a href="#equip">裝備符文</a>
+      <a href="#runebuilds" id="navRb" style="display:none">符文配置</a>
       <a href="#currency">貨幣</a>
       <a href="#spending">課金效率</a>
       <a href="#regions">地圖NPC</a>
@@ -1127,6 +1189,32 @@ table.g-lv tr.cf-conflict td:nth-child(2){color:#e77878}
     </div>
   </div>
   <p class="spend-src" id="spendSrc"></p>
+</section>
+<div class="divider" id="rbDivider" style="display:none"></div>
+
+<!-- RUNE BUILDS 符文配置 -->
+<section id="runebuilds" style="display:none">
+  <div class="reveal">
+    <div class="eyebrow" id="rbEyebrow"></div>
+    <h2 class="sec-title" id="rbTitle"></h2>
+    <p class="sec-sub" id="rbIntro"></p>
+  </div>
+  <p class="rb-disc reveal" id="rbDisc"></p>
+
+  <div class="rb-uni reveal">
+    <h3 id="rbUniTitle"></h3>
+    <div class="rb-tri" id="rbUniItems"></div>
+    <p class="rb-uni-note" id="rbUniNote"></p>
+  </div>
+
+  <div class="filters reveal" id="rbFilters"><span class="filter-label">계열 系別</span></div>
+  <div class="rb-grid" id="rbGrid"></div>
+
+  <div class="rb-gloss reveal">
+    <h3 class="g-h" style="margin-top:0">符文效果對照 <span class="ko">룬 효과</span></h3>
+    <div class="rb-gcols" id="rbGloss"></div>
+  </div>
+  <p class="rb-src reveal" id="rbSrc"></p>
 </section>
 <div class="divider"></div>
 
@@ -1728,6 +1816,56 @@ DATA.npcs.forEach(n=>{
     $("#newsGrid").appendChild(card);
   });
 
+  // 符文配置 — 19 職推薦
+  if(DATA.runeBuilds && DATA.runeBuilds.enabled){
+    const RB=DATA.runeBuilds;
+    $("#runebuilds").style.display=""; $("#rbDivider").style.display=""; $("#navRb").style.display="";
+    $("#rbEyebrow").textContent=RB.eyebrow||"";
+    $("#rbTitle").textContent=RB.title||"";
+    $("#rbIntro").textContent=RB.intro||"";
+    $("#rbDisc").textContent=RB.disclaimer||"";
+    $("#rbSrc").textContent=RB.sourceNote||"";
+
+    const U=RB.universal||{};
+    $("#rbUniTitle").textContent=U.title||"";
+    $("#rbUniNote").textContent=U.note||"";
+    $("#rbUniItems").innerHTML=(U.items||[]).map(it=>
+      `<div class="rb-slot"><div class="rs-lb">${it.slot}</div><div class="rs-pick">${it.pick}</div>
+       <div class="rs-ko">${it.ko}</div><div class="rs-eff">${it.eff}</div>
+       <span class="rs-stat">${it.stat}</span></div>`).join("");
+
+    // 系別中文名沿用 families，確保與職業圖鑑一致
+    const famName={};
+    (DATA.families||[]).forEach(f=>{
+      const id=f.id||""; if(id)famName[id]=f.name;
+    });
+    const line=(k,arr)=>arr&&arr.length
+      ? `<div class="rb-row"><span class="rr-k">${k}</span><span class="rr-v">${
+          arr.length===1?`<b>${arr[0]}</b>`:`<ul>${arr.map(v=>`<li>${v}</li>`).join("")}</ul>`}</span></div>`
+      : "";
+    $("#rbGrid").innerHTML=(RB.builds||[]).map(b=>
+      `<div class="rb-card reveal f-${b.fam}" data-rfam="${b.fam}">
+         <div class="rc-top"><span class="rc-name">${b.name}</span><span class="rc-ko">${b.ko}</span>
+           ${b.alias?`<span class="rc-alias">韓服稱 ${b.alias}</span>`:""}
+           <span class="rc-role">${b.role}</span></div>
+         ${line("武器",b.weapon)}${line("徽章",b.emblem)}${line("防具",b.armor)}
+       </div>`).join("");
+
+    // 系別篩選（沿用既有 chip 樣式）
+    const fams=[...new Set((RB.builds||[]).map(b=>b.fam))];
+    const mkChip=(id,label,on)=>{
+      const c=el("span","chip"+(on?" on":""),label); c.dataset.rfam=id;
+      c.onclick=()=>filterRb(c); return c;
+    };
+    $("#rbFilters").appendChild(mkChip("all","全部",true));
+    fams.forEach(f=>$("#rbFilters").appendChild(mkChip(f,famName[f]||f,false)));
+
+    const gLabel={emblem:"徽章",weapon:"武器",set:"套裝",armor:"防具"};
+    $("#rbGloss").innerHTML=(RB.glossary||[]).map(g=>
+      `<div class="rb-g g-${g.g}"><span class="gg-tag">${gLabel[g.g]||g.g}</span>
+       <div><b>${g.zh}</b><span class="gg-ko">${g.ko}</span><p>${g.eff}</p></div></div>`).join("");
+  }
+
   // 贊助 — 只有至少一個平台填了網址才顯示整區（避免站上出現按不了的按鈕）
   if(DATA.sponsor && DATA.sponsor.enabled){
     const S=DATA.sponsor;
@@ -1940,6 +2078,14 @@ function filterBn(chip){
   curBn=chip.dataset.bn;
   document.querySelectorAll("[data-bn]").forEach(x=>{if(x.classList.contains("chip"))x.classList.remove("on");});
   chip.classList.add("on"); applyFilter();
+}
+function filterRb(chip){
+  const f=chip.dataset.rfam;
+  document.querySelectorAll("#rbFilters .chip").forEach(x=>x.classList.remove("on"));
+  chip.classList.add("on");
+  document.querySelectorAll("#rbGrid .rb-card").forEach(c=>{
+    c.style.display=(f==="all"||c.dataset.rfam===f)?"":"none";
+  });
 }
 function filterNews(chip){
   const cat=chip.dataset.ncat;
