@@ -670,6 +670,25 @@ table.g-shop td:last-child{color:var(--muted);font-size:12px;white-space:nowrap}
   border:1px solid var(--line-soft);border-radius:9px;padding:6px 11px;transition:.15s;background:rgba(159,176,208,.04)}
 .g-src a:hover{color:var(--gold-soft);border-color:var(--line)}
 .g-src a .tier{font-size:10px;color:#2a1f05;background:var(--gold-deep);border-radius:4px;padding:1px 5px;font-weight:700}
+.g-lv-max{font-size:13px;line-height:1.7;color:#e9d9a8;background:rgba(212,175,84,.09);
+  border:1px solid rgba(212,175,84,.28);border-radius:11px;padding:10px 14px;margin-bottom:16px}
+.g-lv-wrap{overflow-x:auto;border:1px solid var(--line-soft);border-radius:14px}
+table.g-lv{width:100%;border-collapse:collapse;font-size:13px;min-width:460px}
+table.g-lv th{background:rgba(231,198,106,.09);color:var(--gold-soft);font-size:11.5px;letter-spacing:1px;
+  text-align:left;padding:10px 15px;font-weight:700;white-space:nowrap}
+table.g-lv td{padding:10px 15px;border-top:1px solid var(--line-soft);color:var(--ink-dim);font-variant-numeric:tabular-nums}
+table.g-lv td:first-child{color:var(--gold-soft);font-family:Georgia,serif;font-weight:700;white-space:nowrap}
+table.g-lv td:nth-child(2){color:#fff;font-weight:700;white-space:nowrap}
+table.g-lv td:last-child{font-size:12px;color:var(--muted)}
+table.g-lv tr.cf-conflict td:nth-child(2){color:#e77878}
+.cf{font-size:10.5px;font-weight:700;letter-spacing:.5px;border-radius:20px;padding:2px 9px;white-space:nowrap;
+  border:1px solid currentColor}
+.cf-solid .cf,.cf.k-solid{color:#5fd2a1}
+.cf-single .cf,.cf.k-single{color:#f0a95f}
+.cf-conflict .cf,.cf.k-conflict{color:#e77878}
+.g-legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.g-legend .lg{display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--muted);
+  border:1px solid var(--line-soft);border-radius:10px;padding:6px 11px;background:rgba(159,176,208,.04)}
 .g-unc-desc{color:var(--ink-dim);font-size:13px;line-height:1.7;margin-bottom:14px}
 .g-unc{background:rgba(240,169,95,.07);border:1px solid rgba(240,169,95,.26);
   border-left:3px solid #f0a95f;border-radius:12px;padding:13px 16px;margin-bottom:10px}
@@ -873,12 +892,25 @@ table.g-shop td:last-child{color:var(--muted);font-size:12px;white-space:nowrap}
     </div>
   </div>
 
-  <h3 class="g-h reveal">② 怎麼維持 <span class="ko">일일 · 주간 동선</span></h3>
+  <h3 class="g-h reveal">② 公會等級能收多少人 <span class="ko">길드 레벨 · 인원</span></h3>
+  <p class="sec-sub reveal" id="guildLvDesc" style="margin-bottom:8px"></p>
+  <p class="g-lv-max reveal" id="guildLvMax"></p>
+  <div class="g-lv-wrap reveal">
+    <table class="g-lv">
+      <thead><tr><th>公會等級</th><th>人數上限</th><th>信心</th><th>備註</th></tr></thead>
+      <tbody id="guildLvRows"></tbody>
+    </table>
+  </div>
+  <div class="g-legend reveal" id="guildLvLegend"></div>
+  <p class="g-note reveal" id="guildLvConflict"></p>
+  <p class="g-note reveal" id="guildLvUp"></p>
+
+  <h3 class="g-h reveal">③ 怎麼維持 <span class="ko">일일 · 주간 동선</span></h3>
   <div class="g-routine reveal" id="guildRoutine"></div>
   <div class="g-miss" id="guildMissions"></div>
   <div class="g-mile reveal" id="guildMile"></div>
 
-  <h3 class="g-h reveal">③ 公會怎麼長大 <span class="ko">길드 함선</span></h3>
+  <h3 class="g-h reveal">④ 公會怎麼長大 <span class="ko">길드 함선</span></h3>
   <p class="sec-sub reveal" id="guildShipIntro" style="margin-bottom:20px"></p>
   <div class="g-ship reveal">
     <div>
@@ -900,7 +932,7 @@ table.g-shop td:last-child{color:var(--muted);font-size:12px;white-space:nowrap}
   <p class="g-note reveal" id="guildShipNote"></p>
   <div class="g-tips reveal" id="guildFuture" style="margin-top:16px"></div>
 
-  <h3 class="g-h reveal">④ 代幣換什麼 <span class="ko">길드 상점</span></h3>
+  <h3 class="g-h reveal">⑤ 代幣換什麼 <span class="ko">길드 상점</span></h3>
   <p class="sec-sub reveal" id="guildShopDesc" style="margin-bottom:16px"></p>
   <div class="g-shop-wrap reveal">
     <table class="g-shop">
@@ -910,7 +942,7 @@ table.g-shop td:last-child{color:var(--muted);font-size:12px;white-space:nowrap}
   </div>
   <p class="g-note reveal" id="guildShopTip"></p>
 
-  <h3 class="g-h reveal">⑤ 招募與經營 <span class="ko">길드 운영</span></h3>
+  <h3 class="g-h reveal">⑥ 招募與經營 <span class="ko">길드 운영</span></h3>
   <p class="sec-sub reveal" id="guildRecruitSrc" style="margin-bottom:18px"></p>
   <div class="g-types reveal" id="guildTypes"></div>
   <div class="g-tips reveal" id="guildTips"></div>
@@ -1361,6 +1393,17 @@ if(DATA.guild){
       `<b>${r.name}</b><span class="ko">${r.ko}</span><p>${r.desc}</p>`));
   });
 
+  if(G.levels){const lv=G.levels;
+    const cfLabel={solid:"雙來源",single:"單一來源",conflict:"衝突"};
+    $("#guildLvDesc").textContent=lv.desc;
+    $("#guildLvMax").textContent=lv.max;
+    $("#guildLvRows").innerHTML=(lv.rows||[]).map(r=>
+      `<tr class="cf-${r.conf}"><td>${r.lv}</td><td>${r.cap}</td><td><span class="cf">${cfLabel[r.conf]||r.conf}</span></td><td>${r.note||""}</td></tr>`).join("");
+    $("#guildLvLegend").innerHTML=(lv.legend||[]).map(l=>
+      `<span class="lg"><span class="cf k-${l.k}">${l.t}</span>${l.d}</span>`).join("");
+    $("#guildLvConflict").textContent=lv.conflictNote;
+    $("#guildLvUp").textContent=lv.levelUp;}
+
   const rt2=G.routine||{};
   if(rt2.daily){const d=rt2.daily;
     $("#guildRoutine").appendChild(el("div","g-rt d",
@@ -1385,7 +1428,9 @@ if(DATA.guild){
     $("#guildShipHow").innerHTML=(sh.how||[]).map(h=>`<li>${h}</li>`).join("");
     $("#guildShipCap").textContent=sh.cap;
     $("#guildShipFac").innerHTML=(sh.facilities||[]).map(f=>
-      `<div class="g-fac"><span class="gf-st">${f.stage}</span><div><b>${f.name}</b><span class="ko">${f.ko}</span><p>${f.desc}</p></div></div>`).join("");
+      `<div class="g-fac"><span class="gf-st">${f.stage}</span><div><b>${f.name}</b><span class="ko">${f.ko}</span><p>${f.desc}</p></div></div>`).join("")
+      +((sh.look||[]).length?`<h4 class="g-sub" style="margin-top:18px">每階的外觀變化</h4>`
+        +sh.look.map(l=>`<div class="g-fac"><span class="gf-st">${l.stage}</span><div><p style="margin-top:3px">${l.desc}</p></div></div>`).join(""):"");
     $("#guildShipMat").innerHTML=(sh.materials||[]).map(m=>
       `<tr class="s${m.stage.charAt(0)}"><td>${m.stage}</td><td>${m.a}</td><td>${m.b}</td><td>${m.c}</td></tr>`).join("");
     $("#guildShipNote").textContent=sh.matNote;}
