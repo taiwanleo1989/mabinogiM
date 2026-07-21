@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>瑪奇 Mobile 新手冒險指南 · 愛爾琳世界攻略</title>
-<meta name="description" content="瑪奇 Mobile（마비노기 모바일）新手友善攻略：18 職業圖鑑、新手黃金路線、生活玩法、貨幣系統，全球資料整理。">
+<meta name="description" content="瑪奇 Mobile（마비노기 모바일）新手友善攻略：21 職業圖鑑、新手黃金路線、生活玩法、貨幣系統，全球資料整理。">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0b1020">
 <link rel="icon" type="image/svg+xml" href="icon.svg">
@@ -163,6 +163,11 @@ section{padding:70px 0;scroll-margin-top:80px}
 .bn.A{background:linear-gradient(135deg,#ffd08a,#ffab40)}
 .bn.B{background:linear-gradient(135deg,#8fdcff,#43b8f0)}
 .bn.C{background:linear-gradient(135deg,#c3ccdd,#9aa7bf)}
+.bn.Q{background:linear-gradient(135deg,#8a93a8,#5c6478)}
+.kr-added{font-size:12px;line-height:1.65;color:#ffd9a8;background:rgba(240,169,95,.1);
+  border:1px solid rgba(240,169,95,.3);border-radius:9px;padding:7px 11px;margin:10px 0 2px}
+.ccard .newkr{position:absolute;top:7px;left:7px;font-size:9px;font-weight:700;letter-spacing:.5px;
+  color:#2a1f05;background:linear-gradient(135deg,#ffd08a,#f0a95f);border-radius:5px;padding:2px 6px}
 
 /* ---------- Modal ---------- */
 .modal{position:fixed;inset:0;z-index:100;display:none;place-items:center;padding:20px;
@@ -447,6 +452,9 @@ footer .warn{font-size:12px;color:#c78; margin-top:8px}
   .ccard h4{font-size:10px;margin:2px 0 0;line-height:1.15}
   .ccard h4 .ko{font-size:.62em}
   .ccard .bn{width:16px;height:16px;font-size:8px;top:4px;right:4px;border-radius:5px}
+  /* 小卡放不下文字徽章，縮成一個圓點，避免蓋到右上角難度標籤 */
+  .ccard .newkr{top:5px;left:5px;width:7px;height:7px;padding:0;border-radius:50%;
+    font-size:0;overflow:hidden;text-indent:-999px}
   .mech-grid{grid-template-columns:1fr}
 }
 @media(max-width:400px){
@@ -1373,6 +1381,7 @@ table.g-lv tr.cf-conflict td:nth-child(2){color:#e77878}
       <div class="row"><span class="lb">武器</span><span class="vl" id="mWeapon"></span></div>
       <div class="row"><span class="lb">定位</span><span class="vl" id="mRole"></span></div>
       <div class="row"><span class="lb">新手友善</span><span class="vl" id="mBnText"></span></div>
+      <div class="kr-added" id="mKrAdded" style="display:none"></div>
       <div class="desc" id="mDesc"></div>
       <div class="skills" id="mSkills">
         <div class="skills-title"><svg class="isvg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 6.1H20l-4.9 3.6 1.9 6.1L12 15.2 7 18.8l1.9-6.1L4 9.1h6.1z" fill="currentColor" stroke="none"/></svg> 代表技能</div>
@@ -1393,7 +1402,9 @@ table.g-lv tr.cf-conflict td:nth-child(2){color:#e77878}
 <script>
 /* ===== global state — DATA loaded from single source of truth (game-data.json) ===== */
 let DATA=null, allCards=[];
-const bnText={S:"S · 超好上手，新手第一首選",A:"A · 推薦，容易上手",B:"B · 可玩，稍需熟悉",C:"C · 進階／需要操作或養成"};
+const bnText={S:"S · 超好上手，新手第一首選",A:"A · 推薦，容易上手",B:"B · 可玩，稍需熟悉",C:"C · 進階／需要操作或養成",
+  Q:"? · 韓服後期追加，尚無新手難度共識——本站不臆測，待台服開服後補"};
+const bnLabel={S:"S",A:"A",B:"B",C:"C",Q:"?"};
 
 /* ===== helpers ===== */
 const $=(s,el=document)=>el.querySelector(s);
@@ -1405,6 +1416,9 @@ const GLYPHS={
   sword:'<path d="M50 26 L54 60 L50 66 L46 60 Z"/><rect x="39" y="59" width="22" height="4.5" rx="1.8"/><rect x="47.5" y="64" width="5" height="12" rx="2"/><circle cx="50" cy="80" r="3.2"/>',
   greatsword:'<path d="M50 24 L56 58 L50 66 L44 58 Z"/><rect x="36" y="56" width="28" height="5" rx="2"/><rect x="47" y="61" width="6" height="15" rx="2"/><circle cx="50" cy="80" r="3.4"/>',
   dagger:'<path d="M50 34 L53 57 L50 61 L47 57 Z"/><rect x="42" y="55" width="16" height="4" rx="1.6"/><rect x="48" y="59" width="4" height="9" rx="1.6"/>',
+  polearm:'<path d="M50 22 L55 42 L50 48 L45 42 Z"/><path d="M55 40 L66 35 L61 47 Z"/><rect x="47.8" y="46" width="4.4" height="30" rx="1.8"/><circle cx="50" cy="80" r="3.2"/>',
+  coil:'<ellipse cx="50" cy="36" rx="13" ry="4.4" fill="none" stroke-width="2.4"/><ellipse cx="50" cy="46" rx="13" ry="4.4" fill="none" stroke-width="2.4"/><ellipse cx="50" cy="56" rx="13" ry="4.4" fill="none" stroke-width="2.4"/><path d="M52 61 L43 78 h6.5 l-2.5 9 10.5-14 h-6.5 z"/>',
+  ritual:'<path d="M50 26 L53.4 55 L50 60 L46.6 55 Z"/><path d="M38 54 C43 62 57 62 62 54" fill="none" stroke-width="2.6"/><rect x="48" y="60" width="4" height="12" rx="1.6"/><circle cx="50" cy="77" r="3.4" fill="none" stroke-width="2.2"/>',
   dualblade:'<polygon points="30,74 35,74 62,30 57,26"/><polygon points="70,74 65,74 38,30 43,26"/><rect x="40" y="60" width="20" height="4" rx="1.6"/>',
   bow:'<path d="M42 28 C31 40 31 64 42 76" fill="none" stroke-width="3.2"/><line x1="42" y1="28" x2="42" y2="76" stroke-width="1.8"/><line x1="40" y1="52" x2="64" y2="52" stroke-width="2.6"/><path d="M67 52 l-8 -4.5 0 9 z"/>',
   longbow:'<path d="M46 24 C34 40 34 64 46 80" fill="none" stroke-width="3.2"/><line x1="46" y1="24" x2="46" y2="80" stroke-width="1.6"/><line x1="44" y1="52" x2="64" y2="52" stroke-width="2.4"/><path d="M66 52 l-7 -4 0 8 z"/>',
@@ -1585,7 +1599,7 @@ DATA.families.forEach(fam=>{
     const card=el("div","ccard");
     card.style.setProperty("--fc",fam.color);
     card.dataset.fam=fam.id; card.dataset.bn=cl.bn;
-    card.innerHTML=`<div class="bn ${cl.bn}">${cl.bn}</div>
+    card.innerHTML=`${cl.krAdded?'<span class="newkr">韓服後期追加</span>':''}<div class="bn ${cl.bn}">${bnLabel[cl.bn]||cl.bn}</div>
       ${cardMedia(fam,cl)}
       <h4>${cl.name}<span class="ko">${cl.korean}</span></h4>`;
     card.onclick=()=>openModal(fam,cl);
@@ -2028,10 +2042,14 @@ function openModal(fam,cl){
   $("#mFam").innerHTML=`${iconSvg(fam.icon)} ${fam.name} · ${fam.korean}`;
   $("#mName").textContent=cl.name;
   $("#mKo").textContent=cl.korean;
-  const bn=$("#mBn"); bn.textContent=cl.bn; bn.className="bn "+cl.bn;
+  const bn=$("#mBn"); bn.textContent=bnLabel[cl.bn]||cl.bn; bn.className="bn "+cl.bn;
   $("#mWeapon").textContent=cl.weapon;
   $("#mRole").textContent=cl.role;
   $("#mBnText").textContent=bnText[cl.bn];
+  // 韓服後期追加的職業：台服開服是否含有未定，明確標示避免誤導
+  const kr=$("#mKrAdded");
+  if(cl.krAdded){kr.style.display="";kr.textContent=cl.krAdded+"，台服開服是否含有待確認";}
+  else kr.style.display="none";
   $("#mDesc").textContent=cl.desc;
   // 媒體：有官方截圖(cl.img)就顯示，否則顯示自製徽章
   const emb=$("#mEmb");
