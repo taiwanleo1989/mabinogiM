@@ -401,7 +401,7 @@
     ],
     "promise": "說在前面：**所有內容永遠免費**。贊助不會解鎖任何東西、不會讓你看到不一樣的資料，也不會影響我怎麼寫。不贊助照樣把整站看到飽。",
     "methods": [
-      {"id":"ecpay","label":"綠界贊助","desc":"信用卡／ATM／超商代碼 · 台灣最順","url":"","tone":"a"},
+      {"id":"ecpay","label":"綠界贊助","desc":"信用卡／ATM／超商代碼 · 台灣最順","url":"","pending":true,"pendingLabel":"審核中 · 即將開放","tone":"a"},
       {"id":"portaly","label":"Portaly","desc":"信用卡／LINE Pay · 台灣在地","url":"","tone":"b"},
       {"id":"kofi","label":"Ko-fi","desc":"PayPal · 海外讀者專用","url":"","tone":"c"}
     ],

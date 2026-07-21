@@ -734,6 +734,12 @@ table.g-lv tr.cf-conflict td:nth-child(2){color:#e77878}
 .sp-method .sm-tx b{color:#fff;font-size:14.5px;display:block}
 .sp-method .sm-tx span{color:var(--muted);font-size:12px}
 .sp-method .sm-go{color:var(--gold-soft);font-size:13px;font-weight:700;white-space:nowrap}
+.sp-method.pending{cursor:default;border-style:dashed;opacity:.65}
+.sp-method.pending:hover{transform:none;box-shadow:none;background:rgba(11,16,32,.4);border-color:var(--line-soft)}
+.sp-method.pending .sm-dot{background:var(--muted);animation:spPulse 1.6s ease-in-out infinite}
+.sp-method.pending .sm-go{color:var(--muted);font-weight:600;font-size:12px}
+@keyframes spPulse{0%,100%{opacity:.4}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.sp-method.pending .sm-dot{animation:none}}
 .sp-note{color:var(--muted);font-size:11.5px;line-height:1.7;margin-top:16px;
   border-top:1px solid var(--line-soft);padding-top:13px}
 @media(max-width:860px){.sp-wrap{grid-template-columns:1fr}}
@@ -1726,7 +1732,8 @@ DATA.npcs.forEach(n=>{
   if(DATA.sponsor && DATA.sponsor.enabled){
     const S=DATA.sponsor;
     const live=(S.methods||[]).filter(m=>m.url&&m.url.trim());
-    if(live.length){
+    const pend=(S.methods||[]).filter(m=>!(m.url&&m.url.trim())&&m.pending);
+    if(live.length||pend.length){
       $("#sponsor").style.display=""; $("#sponsorDivider").style.display=""; $("#navSponsor").style.display="";
       $("#spEyebrow").textContent=S.eyebrow||"";
       $("#spTitle").textContent=S.title||"";
@@ -1741,7 +1748,13 @@ DATA.npcs.forEach(n=>{
            <span class="sm-dot"></span>
            <span class="sm-tx"><b>${m.label}</b><span>${m.desc||""}</span></span>
            <span class="sm-go">前往 ↗</span>
-         </a>`).join("");
+         </a>`).join("")
+      +pend.map(m=>
+        `<div class="sp-method pending ${m.tone||""}">
+           <span class="sm-dot"></span>
+           <span class="sm-tx"><b>${m.label}</b><span>${m.desc||""}</span></span>
+           <span class="sm-go">${m.pendingLabel||"審核中"}</span>
+         </div>`).join("");
     }
   }
 
