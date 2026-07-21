@@ -401,12 +401,12 @@
     ],
     "promise": "說在前面：**所有內容永遠免費**。贊助不會解鎖任何東西、不會讓你看到不一樣的資料，也不會影響我怎麼寫。不贊助照樣把整站看到飽。",
     "methods": [
-      {"id":"kofi","label":"Ko-fi","desc":"信用卡／PayPal · 一次性小額","url":"","tone":"a"},
+      {"id":"ecpay","label":"綠界贊助","desc":"信用卡／ATM／超商代碼 · 台灣最順","url":"","tone":"a"},
       {"id":"portaly","label":"Portaly","desc":"信用卡／LINE Pay · 台灣在地","url":"","tone":"b"},
-      {"id":"ecpay","label":"綠界贊助","desc":"超商代碼／ATM／信用卡","url":"","tone":"c"}
+      {"id":"kofi","label":"Ko-fi","desc":"PayPal · 海外讀者專用","url":"","tone":"c"}
     ],
     "note": "贊助由第三方平台處理，本站不經手也不儲存任何付款資訊。點下去會離開這個網站。",
-    "setupNote": "把平台贊助頁網址填進對應 method 的 url 就會顯示；三個都留空則整區自動隱藏。可只留一個。"
+    "setupNote": "把平台贊助頁網址填進對應 method 的 url 就會顯示；全部留空則整區自動隱藏。順序＝推薦度：綠界為主（2026-07 查證：Stripe 不支援台灣、PayPal 台灣境內交易停用，Ko-fi 對台灣讀者收不到款，僅留給海外讀者）。"
   },
   "board": {
     "enabled": true,
