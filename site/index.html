@@ -329,6 +329,9 @@ section{padding:70px 0;scroll-margin-top:80px}
 .sys-grid{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
 .sys h3{color:var(--gold-soft);font-size:19px;margin-bottom:10px;display:flex;gap:9px;align-items:center}
 .sys ul{list-style:none}
+.sys-note{font-size:12px;line-height:1.75;color:#e9d9a8;margin-top:14px;padding:10px 13px;
+  background:linear-gradient(180deg,rgba(212,175,84,.1),rgba(212,175,84,.03));
+  border:1px solid rgba(212,175,84,.28);border-left:3px solid var(--gold);border-radius:11px}
 .sys li{position:relative;padding:7px 0 7px 24px;color:var(--ink-dim);font-size:14px;border-bottom:1px dashed var(--line-soft)}
 .sys li:last-child{border-bottom:none}
 .sys li::before{content:"◆";position:absolute;left:2px;color:var(--gold);font-size:11px;top:10px}
@@ -1256,7 +1259,7 @@ table.g-lv tr.cf-conflict td:nth-child(2){color:#e77878}
   <div class="reveal">
     <div class="eyebrow">핵심 시스템</div>
     <h2 class="sec-title">你一定要懂的系統機制</h2>
-    <p class="sec-sub">轉職、重生、戰鬥內容——這些是瑪奇 Mobile 的核心循環。</p>
+    <p class="sec-sub">轉職、重生、戰鬥內容、帕拉丁變身——這些是瑪奇 Mobile 的核心循環。</p>
   </div>
   <div class="grid sys-grid" id="sysGrid"></div>
 </section>
@@ -1497,6 +1500,7 @@ const ICONS={
   dungeon:'<path d="M4 21V8h2.2V5.6h2.2V8h2.4V5.6h2.4V8h2.2V5.6h2.2V8H21v13z"/><path d="M10 21v-4.5h4V21"/>',
   custom:'<path d="M12 3a9 9 0 1 0 1 17.9c1.2-.1 1.6-1.4.9-2.4-.6-.9 0-2.1 1.1-2.1h1.5A4.5 4.5 0 0 0 21 12c0-5-4-9-9-9z"/><circle cx="8" cy="10.5" r="1.1" fill="currentColor" stroke="none"/><circle cx="12" cy="8" r="1.1" fill="currentColor" stroke="none"/><circle cx="16" cy="10.5" r="1.1" fill="currentColor" stroke="none"/>',
   desktop:'<rect x="2.5" y="4.5" width="12.5" height="9.5" rx="1.8"/><path d="M6.2 18.5h5M8.7 14v4.5"/><rect x="17" y="8" width="4.5" height="12" rx="1.5"/><path d="M18.7 17.9h1.1" stroke-width="1.6"/>',
+  transfigure:'<circle cx="12" cy="9.6" r="2.9"/><path d="M6.4 20.4c0-3.5 2.5-5.9 5.6-5.9s5.6 2.4 5.6 5.9"/><path d="M3.4 8.4a9.6 9.6 0 0 1 17.2 0" stroke-width="1.4"/><path d="M12 2.2v1.9M5.6 3.9l1 1.6M18.4 3.9l-1 1.6" stroke-width="1.4"/>',
   brk:'<path d="M12 3l7 2.3v5.7c0 4.3-3 7.6-7 9-4-1.4-7-4.7-7-9V5.3z"/><path d="M12.5 7l-2 4 3 1.5-2 4.5" stroke-width="1.6"/>',
   combo:'<rect x="3.5" y="8.5" width="10" height="7" rx="3.5"/><rect x="10.5" y="8.5" width="10" height="7" rx="3.5"/>',
   bolt:'<path d="M13 2L5 13h5l-2 9 9-12h-5z" fill="currentColor" stroke="none"/>',
@@ -1665,7 +1669,9 @@ if(DATA.spending){
 // systems
 DATA.systems.forEach(s=>{
   const items=s.items.map(i=>`<li>${i}</li>`).join("");
-  const c=el("div","card sys reveal",`<h3>${iconSvg(s.icon)} ${s.title}</h3><ul>${items}</ul>`);
+  // note：資料只在客戶端解析、未經官方公告的區塊用它標註來源與不確定性
+  const note=s.note?`<div class="sys-note">${s.note}</div>`:"";
+  const c=el("div","card sys reveal",`<h3>${iconSvg(s.icon)} ${s.title}</h3><ul>${items}</ul>${note}`);
   $("#sysGrid").appendChild(c);
 });
 
