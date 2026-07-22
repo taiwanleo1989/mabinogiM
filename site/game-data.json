@@ -47,7 +47,8 @@
     {"icon":"fish","title":"真正的生活玩法","desc":"採集、釣魚、露營、料理、演奏、打工都有獨立『生活力』評分，可以只當生活玩家。"},
     {"icon":"rebirth","title":"重生系統","desc":"重生後等級保留、外觀重設，取得 Class Master Medal 與精靈痕跡等資源與 buff。"},
     {"icon":"dungeon","title":"多樣戰鬥內容","desc":"地下城、深層地下城、Raid、Abyss（深淵）、裂隙等高難度挑戰等你征服。"},
-    {"icon":"custom","title":"高自由度自訂","desc":"角色外觀、時裝展示、社交動作、Home 系統，用多種方式活在愛爾琳。"}
+    {"icon":"custom","title":"高自由度自訂","desc":"角色外觀、時裝展示、社交動作、Home 系統，用多種方式活在愛爾琳。"},
+    {"icon":"desktop","title":"手機、PC 都能玩","desc":"除了手機版，官方也發行 Windows PC 版（Nexon 啟動器安裝）。PC 版支援鍵盤操作與自訂鍵位，久坐開荒更順手；手機版則隨時隨地推進度。"}
   ],
   "families": [
     {"id":"warrior","name":"戰士系","korean":"전사 계열","color":"#c94b4b","icon":"shield","classes":[
