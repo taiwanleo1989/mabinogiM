@@ -937,6 +937,7 @@ table.bt-lktab td:first-child{color:var(--gold-soft);font-weight:700;white-space
 .bt-vil summary .vt{margin-left:auto;font-size:11px;padding:2px 9px;border-radius:8px;flex:none}
 .bt-vil summary .vt.official{color:#7fd6a0;background:rgba(90,200,140,.12)}
 .bt-vil summary .vt.pending{color:#e7c66a;background:rgba(231,198,106,.1)}
+.bt-vil .vnote{padding:11px 15px 0;margin:0;color:var(--muted);font-size:12.5px;line-height:1.6}
 .bt-vil .vwrap{overflow-x:auto}
 .bt-vil table{width:100%;border-collapse:collapse;font-size:13px;min-width:420px}
 .bt-vil td{padding:9px 15px;border-top:1px solid var(--line-soft);color:var(--ink-dim);vertical-align:top}
@@ -969,6 +970,7 @@ table.bt-lktab td:first-child{color:var(--gold-soft);font-weight:700;white-space
       <a href="#quest">任務清單</a>
       <a href="#daily">每日作業</a>
       <a href="#barter">以物易物</a>
+      <a href="#title">稱號</a>
       <a href="#guild">公會</a>
       <a href="#life">生活玩法</a>
       <a href="#equip">裝備符文</a>
@@ -1121,6 +1123,37 @@ table.bt-lktab td:first-child{color:var(--gold-soft);font-weight:700;white-space
   <div class="reveal" id="barterVillages"></div>
 
   <div class="sys-note reveal" id="barterNote" style="margin-top:22px"></div>
+</section>
+<div class="divider"></div>
+
+<!-- TITLE 稱號 -->
+<section id="title">
+  <div class="reveal">
+    <div class="eyebrow" id="titleEyebrow"></div>
+    <h2 class="sec-title" id="titleTitle"></h2>
+    <p class="sec-sub" id="titleSub"></p>
+  </div>
+  <div class="bt-facts reveal" id="titleFacts"></div>
+
+  <h3 class="bt-h reveal" id="titleMustTitle"></h3>
+  <div class="bt-must reveal" id="titleMust"></div>
+
+  <h3 class="bt-h reveal" id="titleChainTitle"></h3>
+  <div class="bt-lk reveal"><table class="bt-lktab"><tbody id="titleChain"></tbody></table></div>
+  <p class="sec-sub reveal" id="titleChainNote" style="margin-top:10px;font-size:13px"></p>
+
+  <h3 class="bt-h reveal" id="titleBossTitle"></h3>
+  <div class="bt-lk reveal"><table class="bt-lktab"><tbody id="titleBoss"></tbody></table></div>
+  <p class="sec-sub reveal" id="titleBossNote" style="margin-top:10px;font-size:13px"></p>
+
+  <h3 class="bt-h reveal" id="titleClassTitle"></h3>
+  <div class="reveal" id="titleClass"></div>
+  <p class="sec-sub reveal" id="titleClassNote" style="margin-top:10px;font-size:13px"></p>
+
+  <h3 class="bt-h reveal" id="titleCatTitle"></h3>
+  <div class="reveal" id="titleCats"></div>
+
+  <div class="sys-note reveal" id="titleNote" style="margin-top:22px"></div>
 </section>
 <div class="divider"></div>
 
@@ -1790,6 +1823,43 @@ if(DATA.barter){
   }).join("");
 
   $("#barterNote").innerHTML=B.note;
+}
+
+// title 稱號
+if(DATA.title){
+  const T=DATA.title;
+  $("#titleEyebrow").textContent=T.eyebrow;
+  $("#titleTitle").textContent=T.title;
+  $("#titleSub").textContent=T.sub;
+  $("#titleFacts").innerHTML=(T.facts||[]).map(f=>`<span>${f}</span>`).join("");
+
+  $("#titleMustTitle").innerHTML=`${iconSvg("star")} ${T.mustTitle}`;
+  $("#titleMust").innerHTML=(T.mustDo||[]).map(m=>
+    `<div class="m"><div class="mh"><span class="mn">${m.npc}</span><span class="mk">${m.ko}</span><span class="mw">${m.where}</span></div>`+
+    `<div class="mt">${m.trade}</div><div class="mwhy">${m.why}</div></div>`).join("");
+
+  $("#titleChainTitle").innerHTML=`${iconSvg("rebirth")} ${T.chainTitle}`;
+  $("#titleChain").innerHTML=(T.chain||[]).map(r=>`<tr><td>${r.t}</td><td>${r.e}</td><td>${r.c}</td></tr>`).join("");
+  $("#titleChainNote").textContent=T.chainNote;
+
+  $("#titleBossTitle").innerHTML=`${iconSvg("swords")} ${T.bossTitle}`;
+  $("#titleBoss").innerHTML=(T.boss||[]).map(r=>`<tr><td>${r.t}</td><td>${r.e}</td><td>${r.c}</td></tr>`).join("");
+  $("#titleBossNote").textContent=T.bossNote;
+
+  $("#titleClassTitle").innerHTML=`${iconSvg("medal")} ${T.classTitle}`;
+  const ct=(T.classTitles||[]).map(r=>`<tr><td>${r.j}</td><td>${r.t}</td><td>${r.eq}</td><td>${r.ho}</td></tr>`).join("");
+  $("#titleClass").innerHTML=`<details class="bt-vil" open><summary>各職 Lv.65 究極稱號<span class="vc">${(T.classTitles||[]).length} 職</span></summary><div class="vwrap"><table><tbody>${ct}</tbody></table></div></details>`;
+  $("#titleClassNote").textContent=T.classNote;
+
+  $("#titleCatTitle").innerHTML=`${iconSvg("book")} ${T.catTitle}`;
+  $("#titleCats").innerHTML=(T.cats||[]).map((c,i)=>{
+    const rows=c.rows.map(r=>`<tr><td>${r.t}</td><td>${r.e}</td><td>${r.c}</td></tr>`).join("");
+    const note=c.note?`<p class="vnote">${c.note}</p>`:"";
+    return `<details class="bt-vil"${i===0?" open":""}><summary>${c.name}<span class="vk">${c.ko}</span><span class="vt ${c.tag==='保有'?'official':'pending'}">${c.tag}</span></summary>`+
+      `<div class="vwrap">${note}<table><tbody>${rows}</tbody></table></div></details>`;
+  }).join("");
+
+  $("#titleNote").innerHTML=T.note;
 }
 
 // guild 公會
